@@ -15,6 +15,9 @@ PRODUCTS = [
     # (category, name, slug, price, mrp, size, sku, featured, bestseller)
     ("A2 Cow Ghee", "A2 Desi Cow Bilona Ghee — 1 Litre", "a2-ghee-1l", 2140, 2790, "1 Litre", "A2-1L", True, True),
     ("A2 Cow Ghee", "A2 Desi Cow Bilona Ghee — 500 ml", "a2-ghee-500ml", 1299, 1699, "500 ml", "A2-500", False, False),
+    ("A2 Cow Ghee", "A2 Gir Cow Bilona Ghee — 1 Litre", "a2-gir-ghee-1l", 2240, 2890, "1 Litre", "A2-GIR-1L", True, False),
+    ("A2 Cow Ghee", "Pahadi Cow Bilona Ghee — 1 Litre", "pahadi-cow-ghee-1l", 2340, 2990, "1 Litre", "PAHADI-1L", False, False),
+    ("A2 Cow Ghee", "A2 Desi Cow Bilona Ghee — 5 Litre", "a2-ghee-5l", 9990, 12490, "5 Litre", "A2-5L", True, False),
     ("Buffalo Ghee", "Buffalo Bilona Ghee — 1 Litre", "buffalo-ghee-1l", 1949, 2299, "1 Litre", "BUF-1L", False, True),
     ("Gift Sets", "A2 Ghee Gift Pack — 2 × 500 ml", "a2-ghee-gift", 2699, 3199, "2 × 500 ml", "GIFT-2X500", True, False),
     ("Combos", "A2 & Buffalo Combo — 1 L + 500 ml", "a2-buffalo-combo", 2990, 3490, "1 L + 500 ml", "COMBO-A2BUF", False, False),
@@ -286,5 +289,6 @@ class Command(BaseCommand):
             defaults={"discount_type": "percent", "value": 10, "max_discount": 300, "is_active": True},
         )
         self.stdout.write(self.style.SUCCESS(
-            "Seeded: 4 categories, 5 products, 5 policies, 3 FAQs, settings, coupon WELCOME10."
+            "Seeded: 4 categories, products, 5 policies, 3 FAQs, settings, coupon WELCOME10."
         ))
+        self.stdout.write("Next: python manage.py attach_product_images")

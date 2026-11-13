@@ -10,11 +10,14 @@
   "use strict";
 
   var IMAGE_FALLBACK = {
-    "a2-ghee-1l": "https://cdn.shopify.com/s/files/1/0054/8300/3951/products/91yr2itCWcL._SL1500__1_1500x.jpg?v=1569312696",
-    "a2-ghee-500ml": "https://ishavasyamproducts.com/cdn/shop/products/11_900x.jpg?v=1634724399",
-    "buffalo-ghee-1l": "https://images.news18.com/news18marathi/uploads/2026/01/Ghee-1-2026-01-f6c0e764d6275aedfa888fc6712cb492-3x2.jpg?im=Resize,width=640,aspect=fit,type=normal",
-    "a2-ghee-gift": "https://www.distacart.com/cdn/shop/products/IshaVasyamA2DesiGhee.._1280x.jpg?v=1737559989",
-    "a2-buffalo-combo": "https://cdn.shopify.com/s/files/1/0054/8300/3951/products/91yr2itCWcL._SL1500__1_1500x.jpg?v=1569312696",
+    "a2-ghee-1l": "assets/images/products/a2-desi-cow-1l.png",
+    "a2-ghee-500ml": "assets/images/products/a2-desi-cow-1l.png",
+    "buffalo-ghee-1l": "assets/images/products/buffalo-ghee-1l.png",
+    "a2-ghee-gift": "assets/images/products/a2-desi-cow-1l.png",
+    "a2-buffalo-combo": "assets/images/products/buffalo-ghee-1l.png",
+    "a2-gir-ghee-1l": "assets/images/products/a2-gir-cow-1l.png",
+    "pahadi-cow-ghee-1l": "assets/images/products/pahadi-cow-1l.png",
+    "a2-ghee-5l": "assets/images/products/a2-desi-cow-5l.png",
   };
 
   var SIZE_LABEL = {
@@ -23,6 +26,9 @@
     "buffalo-ghee-1l": "1 Litre",
     "a2-ghee-gift": "Gift Pack",
     "a2-buffalo-combo": "Combo",
+    "a2-gir-ghee-1l": "1 Litre",
+    "pahadi-cow-ghee-1l": "1 Litre",
+    "a2-ghee-5l": "5 Litre",
   };
 
   var PRODUCTS = {}; // slug -> {id(slug), name, size, price, oldPrice, image, variants:[{id, size_label, price, mrp, stock}]}
