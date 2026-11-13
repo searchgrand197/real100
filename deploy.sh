@@ -295,15 +295,25 @@ nginx -t
 systemctl reload nginx
 
 echo "==> Attempting Let's Encrypt SSL (DNS A records for both domains must point here)"
+# --expand: update an existing cert (e.g. .com only) when adding .in / www
 if certbot --nginx \
     -d "${DOMAIN}" -d "www.${DOMAIN}" \
     -d "${DOMAIN_ALT}" -d "www.${DOMAIN_ALT}" \
+    --expand \
     --non-interactive --agree-tos -m "${EMAIL}" --redirect; then
   echo "SSL enabled: https://${DOMAIN} and https://${DOMAIN_ALT}"
 else
-  echo "WARN: Certbot failed (DNS not ready yet?). Site is on http://${DOMAIN} / http://${DOMAIN_ALT}"
-  echo "Later run:"
-  echo "  certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} -d ${DOMAIN_ALT} -d www.${DOMAIN_ALT} -m ${EMAIL} --agree-tos --non-interactive --redirect"
+  echo "WARN: full dual-domain cert failed — trying ${DOMAIN} only"
+  if certbot --nginx \
+      -d "${DOMAIN}" -d "www.${DOMAIN}" \
+      --expand \
+      --non-interactive --agree-tos -m "${EMAIL}" --redirect; then
+    echo "SSL enabled: https://${DOMAIN} (add ${DOMAIN_ALT} DNS, then re-run certbot with --expand)"
+  else
+    echo "WARN: Certbot failed (DNS not ready yet?). Site is on http://${DOMAIN} / http://${DOMAIN_ALT}"
+    echo "Later run:"
+    echo "  certbot --nginx --expand -d ${DOMAIN} -d www.${DOMAIN} -d ${DOMAIN_ALT} -d www.${DOMAIN_ALT} -m ${EMAIL} --agree-tos --non-interactive --redirect"
+  fi
 fi
 
 systemctl restart "${SERVICE_NAME}"
