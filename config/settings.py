@@ -163,6 +163,12 @@ REST_FRAMEWORK = {
 # site). A service-account file is optional and not required.
 FIREBASE_PROJECT_ID = env("FIREBASE_PROJECT_ID", "kushnath-19401")
 FIREBASE_CREDENTIALS_PATH = env("FIREBASE_CREDENTIALS_PATH")
+# Browser API key for storefront phone OTP (Identity Toolkit). Override in
+# .env if Google Cloud rotates the key.
+FIREBASE_WEB_API_KEY = env(
+    "FIREBASE_WEB_API_KEY",
+    "AIzaSyAvRobkSXCsNFOdogIFwKuN95nLOQIkXoI",
+)
 # Demo OTP is off once Firebase is the login. Set ALLOW_DEMO_AUTH=1 only
 # for a machine that cannot reach Firebase.
 ALLOW_DEMO_AUTH = env_bool("ALLOW_DEMO_AUTH", False)

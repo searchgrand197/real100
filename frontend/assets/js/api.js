@@ -86,161 +86,167 @@
   }
 
   /* ---------- Firebase Phone Auth (OTP) ----------
-     Production: Firebase SMS via the configured web app.
-     Local/dev: when the API has ALLOW_DEMO_AUTH=1, use demo OTP
-     (Firebase blocks Phone Auth on "localhost"; 127.0.0.1 needs
-     Authorized domains + SMS region policy in the Firebase console). */
-  var DEFAULT_FIREBASE_CONFIG = {
-    apiKey: "AIzaSyAvRobkSXCsNFOdogIFwKuN95nLOQIkXoI",
-    authDomain: "kushnath-19401.firebaseapp.com",
-    projectId: "kushnath-19401",
-    storageBucket: "kushnath-19401.firebasestorage.app",
-    messagingSenderId: "704991416939",
-    appId: "1:704991416939:web:ccf9033058042dadf4d72e",
-    measurementId: "G-VYRLCTDEKM",
-  };
-
-  function firebaseConfig() {
-    if (window.REAL100AGRO_FIREBASE_CONFIG === false) return null;
-    return window.REAL100AGRO_FIREBASE_CONFIG || DEFAULT_FIREBASE_CONFIG;
-  }
+     Uses Identity Toolkit REST + Google reCAPTCHA (not the Firebase Auth
+     JS RecaptchaVerifier, which was throwing auth/invalid-api-key on this
+     domain even when the browser key itself was valid).
+     Local/dev: ALLOW_DEMO_AUTH=1 on the API enables OTP 1234. */
+  var DEFAULT_FIREBASE_API_KEY = "AIzaSyAvRobkSXCsNFOdogIFwKuN95nLOQIkXoI";
 
   function isLocalHost() {
     var host = window.location.hostname;
     return host === "localhost" || host === "127.0.0.1" || host === "";
   }
 
-  var firebasePromise = null;
-
-  function loadFirebase() {
-    var config = firebaseConfig();
-    if (!config) {
-      return Promise.reject(new Error("Firebase is not configured."));
-    }
-    if (firebasePromise) return firebasePromise;
-    firebasePromise = new Promise(function (resolve, reject) {
-      function loadScript(src) {
-        return new Promise(function (res, rej) {
-          var s = document.createElement("script");
-          s.src = src; s.async = true; s.onload = res; s.onerror = rej;
-          document.head.appendChild(s);
-        });
-      }
-      loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js")
-        .then(function () { return loadScript("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"); })
-        .then(function () {
-          if (!window.firebase.apps.length) window.firebase.initializeApp(config);
-          resolve(window.firebase.auth());
-        })
-        .catch(function () { reject(new Error("Could not load Firebase. Check your connection.")); });
-    });
-    return firebasePromise;
-  }
-
-  var confirmationResult = null;
-  var recaptchaVerifier = null;
   var demoLogin = null;
+  var phoneSession = null; // { apiKey, sessionInfo, phoneE164 }
+  var grecaptchaPromise = null;
+  var grecaptchaWidgetId = null;
 
-  function firebaseAuthMessage(err) {
-    var code = err && err.code;
-    if (code === "auth/too-many-requests") return "Too many attempts. Please wait a few minutes and try again.";
-    if (code === "auth/invalid-phone-number") return "That mobile number is not valid.";
-    if (code === "auth/invalid-verification-code") return "Incorrect OTP. Please try again.";
-    if (code === "auth/code-expired") return "That OTP has expired. Request a new one.";
-    if (code === "auth/captcha-check-failed") return "The security check failed. Request a new OTP.";
-    if (code === "auth/unauthorized-domain") {
-      return "This site domain is not allowed in Firebase. Add it under Authentication → Settings → Authorized domains (e.g. real100agro.com, www.real100agro.com, 127.0.0.1).";
+  function identityErrorMessage(payload, fallback) {
+    var msg = (payload && payload.error && payload.error.message) || fallback || "Could not send the OTP.";
+    msg = String(msg);
+    if (/TOO_MANY_ATTEMPTS|QUOTA/i.test(msg)) return "Too many attempts. Please wait a few minutes and try again.";
+    if (/INVALID_PHONE_NUMBER/i.test(msg)) return "That mobile number is not valid.";
+    if (/INVALID_CODE|SESSION_EXPIRED/i.test(msg)) return "Incorrect or expired OTP. Request a new one.";
+    if (/CAPTCHA|RECAPTCHA/i.test(msg)) return "Security check failed. Refresh the page and try again.";
+    if (/API_KEY|API key/i.test(msg)) {
+      return "Firebase API key blocked. In Google Cloud → Credentials, set API restrictions to include Identity Toolkit API (or Don't restrict key), then Save.";
     }
-    if (code === "auth/operation-not-allowed") {
-      return "Phone sign-in is disabled in Firebase. Enable Phone under Authentication → Sign-in method.";
+    if (/OPERATION_NOT_ALLOWED/i.test(msg)) {
+      return "Phone sign-in is disabled in Firebase. Enable Phone under Authentication → Sign-in method, and allow India in SMS region policy.";
     }
-    if (code === "auth/invalid-api-key") {
-      return "Firebase API key rejected. In Google Cloud Console → APIs & Services → Credentials, allow this site’s domain on the Browser key (HTTP referrers), and enable Identity Toolkit API.";
-    }
-    if (code === "auth/invalid-app-credential" || code === "auth/argument-error") {
-      return "Phone verification failed for this domain. On local use http://127.0.0.1:8001 (not localhost) and enable demo OTP, or add the domain in Firebase Authorized domains.";
-    }
-    return (err && err.message) || "Could not send the OTP. Please try again.";
+    return msg;
   }
 
-  function clearRecaptcha() {
-    if (recaptchaVerifier) {
-      try { recaptchaVerifier.clear(); } catch (e) { /* ignore */ }
-      recaptchaVerifier = null;
-    }
-    var container = document.getElementById("firebase-recaptcha");
-    if (container) container.innerHTML = "";
+  function loadScript(src) {
+    return new Promise(function (res, rej) {
+      var existing = document.querySelector('script[src="' + src + '"]');
+      if (existing) {
+        if (existing.getAttribute("data-loaded") === "1") return res();
+        existing.addEventListener("load", function () { res(); });
+        existing.addEventListener("error", function () { rej(new Error("Could not load script")); });
+        return;
+      }
+      var s = document.createElement("script");
+      s.src = src;
+      s.async = true;
+      s.onload = function () { s.setAttribute("data-loaded", "1"); res(); };
+      s.onerror = function () { rej(new Error("Could not load script")); };
+      document.head.appendChild(s);
+    });
   }
 
-  function setupRecaptcha(auth) {
-    clearRecaptcha();
-    var container = document.getElementById("firebase-recaptcha");
-    if (!container) {
-      container = document.createElement("div");
-      container.id = "firebase-recaptcha";
-      container.style.display = "none";
-      document.body.appendChild(container);
+  function ensureGrecaptcha() {
+    if (window.grecaptcha && window.grecaptcha.render) {
+      return Promise.resolve(window.grecaptcha);
     }
-    recaptchaVerifier = new window.firebase.auth.RecaptchaVerifier(container, {
-      size: "invisible",
-      callback: function () {},
-      "expired-callback": function () { clearRecaptcha(); },
-    }, auth);
-    return recaptchaVerifier.render().then(function () { return recaptchaVerifier; });
+    if (grecaptchaPromise) return grecaptchaPromise;
+    grecaptchaPromise = new Promise(function (resolve, reject) {
+      window.__real100agroRecaptchaReady = function () {
+        resolve(window.grecaptcha);
+      };
+      loadScript("https://www.google.com/recaptcha/api.js?onload=__real100agroRecaptchaReady&render=explicit")
+        .catch(reject);
+    });
+    return grecaptchaPromise;
+  }
+
+  function getRecaptchaToken(siteKey) {
+    return ensureGrecaptcha().then(function (grecaptcha) {
+      return new Promise(function (resolve, reject) {
+        var container = document.getElementById("firebase-recaptcha");
+        if (!container) {
+          container = document.createElement("div");
+          container.id = "firebase-recaptcha";
+          container.style.position = "fixed";
+          container.style.left = "-9999px";
+          container.style.bottom = "0";
+          document.body.appendChild(container);
+        }
+        function run() {
+          try {
+            if (grecaptchaWidgetId == null) {
+              grecaptchaWidgetId = grecaptcha.render(container, {
+                sitekey: siteKey,
+                size: "invisible",
+                callback: function (token) { resolve(token); },
+                "error-callback": function () { reject(new Error("Security check failed. Refresh and try again.")); },
+                "expired-callback": function () { reject(new Error("Security check expired. Try again.")); },
+              });
+            } else {
+              grecaptcha.reset(grecaptchaWidgetId);
+            }
+            var out = grecaptcha.execute(grecaptchaWidgetId);
+            if (out && typeof out.then === "function") {
+              out.then(resolve).catch(reject);
+            }
+          } catch (err) {
+            reject(err);
+          }
+        }
+        if (grecaptcha.ready) grecaptcha.ready(run);
+        else run();
+      });
+    });
   }
 
   function useDemoOtp(phone10, cfg) {
     demoLogin = { phone: phone10, otp: String((cfg && cfg.demo_otp) || "1234") };
-    confirmationResult = null;
+    phoneSession = null;
     return { demo: true, otp: demoLogin.otp };
   }
 
-  function sendFirebaseOtp(phone10) {
+  function sendFirebaseOtp(phone10, apiKey) {
     demoLogin = null;
-    return loadFirebase().then(function (auth) {
-      var prep = auth.currentUser ? auth.signOut() : Promise.resolve();
-      return prep.then(function () { return setupRecaptcha(auth); })
-        .then(function (verifier) {
-          return auth.signInWithPhoneNumber("+91" + phone10, verifier);
-        })
-        .then(function (result) {
-          confirmationResult = result;
+    var key = apiKey || DEFAULT_FIREBASE_API_KEY;
+    return fetch("https://identitytoolkit.googleapis.com/v1/recaptchaParams?key=" + encodeURIComponent(key), {
+      method: "GET",
+      credentials: "omit",
+    }).then(function (resp) {
+      return resp.json().then(function (data) {
+        if (!resp.ok) throw new Error(identityErrorMessage(data, "Could not start phone verification."));
+        if (!data.recaptchaSiteKey) throw new Error("Firebase reCAPTCHA is not available for this API key.");
+        return data.recaptchaSiteKey;
+      });
+    }).then(function (siteKey) {
+      return getRecaptchaToken(siteKey);
+    }).then(function (recaptchaToken) {
+      return fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendVerificationCode?key=" + encodeURIComponent(key), {
+        method: "POST",
+        credentials: "omit",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          phoneNumber: "+91" + phone10,
+          recaptchaToken: recaptchaToken,
+        }),
+      }).then(function (resp) {
+        return resp.json().then(function (data) {
+          if (!resp.ok) throw new Error(identityErrorMessage(data, "Could not send the OTP."));
+          if (!data.sessionInfo) throw new Error("OTP session was not created. Try again.");
+          phoneSession = { apiKey: key, sessionInfo: data.sessionInfo, phoneE164: "+91" + phone10 };
           return { demo: false };
-        })
-        .catch(function (err) {
-          clearRecaptcha();
-          throw err;
         });
+      });
     });
   }
 
   function sendOtp(phone10) {
-    // Always ask the API whether demo auth is on — Firebase config alone
-    // used to force SMS and skip the working local demo path.
     return request("/auth/config/").then(function (cfg) {
       var forceDemo = window.REAL100AGRO_USE_DEMO_AUTH === true;
       var forceFirebase = window.REAL100AGRO_FORCE_FIREBASE === true;
       var demoOk = !!(cfg && cfg.demo_auth);
+      var apiKey = (cfg && cfg.firebase_web_api_key) || DEFAULT_FIREBASE_API_KEY;
 
       if (!forceFirebase && (forceDemo || (demoOk && isLocalHost()))) {
         return useDemoOtp(phone10, cfg);
       }
-      if (!firebaseConfig()) {
+      if (!apiKey) {
         if (demoOk) return useDemoOtp(phone10, cfg);
         throw new Error("Phone login needs Firebase. For local testing set ALLOW_DEMO_AUTH=1 on the API.");
       }
-      return sendFirebaseOtp(phone10).catch(function (err) {
-        var code = err && err.code;
-        // Fallback when Firebase rejects the browser key / domain, if demo is enabled.
-        if (demoOk && (
-          isLocalHost() ||
-          code === "auth/invalid-api-key" ||
-          code === "auth/unauthorized-domain" ||
-          code === "auth/invalid-app-credential"
-        )) {
-          return useDemoOtp(phone10, cfg);
-        }
-        throw new Error(firebaseAuthMessage(err));
+      return sendFirebaseOtp(phone10, apiKey).catch(function (err) {
+        if (demoOk && isLocalHost()) return useDemoOtp(phone10, cfg);
+        throw err instanceof Error ? err : new Error(String(err && err.message || err));
       });
     });
   }
@@ -254,17 +260,35 @@
       demoLogin = null;
       return Promise.resolve(token);
     }
-    if (!confirmationResult) return Promise.reject(new Error("Request a new OTP first."));
-    return confirmationResult.confirm(String(code).trim()).then(function (result) {
-      return result.user.getIdToken();
-    }).catch(function (err) {
-      throw new Error(firebaseAuthMessage(err));
+    if (!phoneSession || !phoneSession.sessionInfo) {
+      return Promise.reject(new Error("Request a new OTP first."));
+    }
+    return fetch(
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPhoneNumber?key=" +
+        encodeURIComponent(phoneSession.apiKey),
+      {
+        method: "POST",
+        credentials: "omit",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionInfo: phoneSession.sessionInfo,
+          code: String(code).trim(),
+        }),
+      }
+    ).then(function (resp) {
+      return resp.json().then(function (data) {
+        if (!resp.ok) throw new Error(identityErrorMessage(data, "Incorrect OTP. Try again."));
+        if (!data.idToken) throw new Error("Login token missing. Request a new OTP.");
+        phoneSession = null;
+        return data.idToken;
+      });
     });
   }
 
   function signOutFirebase() {
-    if (!window.firebase || !window.firebase.apps || !window.firebase.apps.length) return Promise.resolve();
-    return window.firebase.auth().signOut().catch(function () {});
+    phoneSession = null;
+    demoLogin = null;
+    return Promise.resolve();
   }
 
   /* ---------- Razorpay Checkout ---------- */

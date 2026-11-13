@@ -21,6 +21,7 @@ class AuthConfigView(APIView):
             "demo_otp": settings.DEMO_OTP if settings.ALLOW_DEMO_AUTH else "",
             "firebase": bool(settings.FIREBASE_PROJECT_ID),
             "firebase_project_id": settings.FIREBASE_PROJECT_ID,
+            "firebase_web_api_key": settings.FIREBASE_WEB_API_KEY or "",
             "razorpay": bool(settings.RAZORPAY_KEY_ID),
         })
 
