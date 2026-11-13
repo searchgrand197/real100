@@ -97,6 +97,7 @@
     storageBucket: "kushnath-19401.firebasestorage.app",
     messagingSenderId: "704991416939",
     appId: "1:704991416939:web:ccf9033058042dadf4d72e",
+    measurementId: "G-VYRLCTDEKM",
   };
 
   function firebaseConfig() {
@@ -152,6 +153,9 @@
     }
     if (code === "auth/operation-not-allowed") {
       return "Phone sign-in is disabled in Firebase. Enable Phone under Authentication → Sign-in method.";
+    }
+    if (code === "auth/invalid-api-key") {
+      return "Firebase API key rejected. In Google Cloud Console → APIs & Services → Credentials, allow this site’s domain on the Browser key (HTTP referrers), and enable Identity Toolkit API.";
     }
     if (code === "auth/invalid-app-credential" || code === "auth/argument-error") {
       return "Phone verification failed for this domain. On local use http://127.0.0.1:8001 (not localhost) and enable demo OTP, or add the domain in Firebase Authorized domains.";
