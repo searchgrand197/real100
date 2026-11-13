@@ -10,10 +10,25 @@
 
   var stage = root.querySelector("[data-hero-stage]");
   var jar = root.querySelector("[data-hero-jar]");
+  var jarImg = root.querySelector("[data-hero-jar-image]");
   var drops = Array.prototype.slice.call(
     root.querySelectorAll("[data-hero-droplets] .hero-drop")
   );
   if (!stage || !jar) return;
+
+  // Random hero product photo on each visit
+  var HERO_PRODUCTS = [
+    { src: "assets/images/products/a2-desi-cow-1l.png", alt: "Real100 A2 Desi Cow Bilona Ghee" },
+    { src: "assets/images/products/a2-gir-cow-1l.png", alt: "Real100 A2 Gir Cow Bilona Ghee" },
+    { src: "assets/images/products/pahadi-cow-1l.png", alt: "Real100 Pahadi Cow Bilona Ghee" },
+    { src: "assets/images/products/buffalo-ghee-1l.png", alt: "Real100 Buffalo Bilona Ghee" },
+    { src: "assets/images/products/a2-desi-cow-5l.png", alt: "Real100 A2 Desi Cow Bilona Ghee 5 Litre" },
+  ];
+  if (jarImg && HERO_PRODUCTS.length) {
+    var pick = HERO_PRODUCTS[Math.floor(Math.random() * HERO_PRODUCTS.length)];
+    jarImg.src = pick.src;
+    jarImg.alt = pick.alt;
+  }
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   var pointerOk = window.matchMedia("(pointer: fine)").matches;
