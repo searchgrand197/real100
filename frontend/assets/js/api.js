@@ -230,8 +230,14 @@
         throw new Error("Phone login needs Firebase. For local testing set ALLOW_DEMO_AUTH=1 on the API.");
       }
       return sendFirebaseOtp(phone10).catch(function (err) {
-        // Local fallback when Firebase Phone Auth is blocked (localhost policy).
-        if (demoOk && isLocalHost()) {
+        var code = err && err.code;
+        // Fallback when Firebase rejects the browser key / domain, if demo is enabled.
+        if (demoOk && (
+          isLocalHost() ||
+          code === "auth/invalid-api-key" ||
+          code === "auth/unauthorized-domain" ||
+          code === "auth/invalid-app-credential"
+        )) {
           return useDemoOtp(phone10, cfg);
         }
         throw new Error(firebaseAuthMessage(err));
