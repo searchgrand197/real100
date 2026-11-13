@@ -1,0 +1,526 @@
+================================================================
+  real100agro — ADMIN PANEL GUIDE
+  How to run your online ghee store, step by step
+  For: Real 100 Agro India Pvt Ltd
+  Updated: 11 November 2026
+================================================================
+
+This guide explains the admin panel in plain words. The admin
+panel is the control room of your website. Everything you need
+to run the shop — orders, products, prices, offers, reviews,
+and the words on the website — is changed from here. You do not
+need to touch any code.
+
+If you remember only one thing, remember this: change things in
+the admin panel, and they appear on the website by themselves.
+
+----------------------------------------------------------------
+1. HOW TO OPEN THE ADMIN PANEL
+----------------------------------------------------------------
+
+1. Open your website address in the browser and add /admin/ at
+   the end.
+   Example: https://your-website.com/admin/
+   (While the site is being tested on the developer's computer,
+   the address is http://127.0.0.1:8000/admin/)
+
+2. Log in with the username and password your developer gives
+   you. This login is only for you (the shop owner). Customers
+   never see this page — they log in with their mobile number
+   and an OTP code, which is a different thing.
+
+3. After logging in, you will see a list of sections on the left
+   side, like this:
+
+     ACCOUNTS   - Users, Addresses
+     CATALOG    - Categories, Products, Product variants, Reviews,
+                  Batches
+     CONTENT    - Policies, FAQs, Site settings, Announcements,
+                  Newsletter subscribers, Contact messages
+     ORDERS     - Orders, Coupons, Order status logs, Replacements,
+                  Carts
+
+4. Click a section name to open it. You will see a list of all
+   the items in it. Click any item to open and edit it. The
+   green "ADD" button on the top right creates a new item.
+
+5. After making any change, always click SAVE at the bottom
+   right. If you leave the page without saving, the change is
+   lost.
+
+----------------------------------------------------------------
+2. YOUR DAILY ROUTINE (5 MINUTES EVERY MORNING)
+----------------------------------------------------------------
+
+Do these in order, every day:
+
+  1. ORDERS — Open Orders. Look for new orders with status
+     "Placed". These need your attention first (see Part A).
+  2. CONTACT MESSAGES — Open Contact messages. Reply to any new
+     customer message, then tick "Is replied" on it (see Part F).
+  3. REVIEWS — Open Reviews. Approve the genuine new reviews so
+     they show on the website (see Part D).
+  4. REPLACEMENTS — Open Replacements. Check if any customer
+     asked for a replacement jar (see Part H).
+  5. STOCK — Glance at Product variants. If any variant shows a
+     low stock warning, plan a new batch (see Part B).
+
+That is the whole daily job. The rest of this guide explains
+each part in detail for the days when you need it.
+
+----------------------------------------------------------------
+PART A. ORDERS — THE FULL JOURNEY OF ONE ORDER
+----------------------------------------------------------------
+
+An order moves through these stages, in this order:
+
+  Placed -> Confirmed -> Packed -> Shipped -> Delivered
+
+There are three extra stages for problem orders:
+
+  Cancelled   (order cancelled before delivery)
+  Refunded    (money returned to the customer)
+  RTO         (Returned to origin — the parcel came back to you)
+
+WHAT YOU DO AT EACH STAGE
+--------------------------
+
+1. PLACED — A customer has just ordered.
+   - Open the order. Check the customer's name, phone, address
+     and pincode, and the items ordered.
+   - If anything looks wrong (wrong address, duplicate order),
+     call the customer on the phone number shown.
+   - If it is a Cash on Delivery (COD) order, it is confirmed
+     the moment it is placed. If it is a prepaid order, check
+     that Payment status shows "Paid" before you pack it. If it
+     shows "Failed", do not dispatch — call the customer.
+
+2. CONFIRMED — You have accepted the order.
+   - Change Status from "Placed" to "Confirmed" and save.
+   - This tells the customer on their "My Orders" page that you
+     are working on it.
+
+3. PACKED — The ghee jar is packed and ready.
+   - Change Status to "Packed" and save.
+
+4. SHIPPED — You have handed the parcel to Delhivery.
+   - Book the shipment on the Delhivery dashboard as usual and
+     copy the AWB (tracking) number.
+   - Paste the AWB number into the order in the admin panel
+     (field: Delhivery AWB) and change Status to "Shipped".
+   - The customer can now track the parcel from their
+     "My Orders" page.
+
+5. DELIVERED — The customer has received the parcel.
+   - Change Status to "Delivered" when Delhivery confirms
+     delivery. Only after this stage can the customer write a
+     "Verified Purchase" review.
+
+CANCELLING AN ORDER
+-------------------
+- A customer can cancel only before the order is dispatched.
+  You can also cancel from the admin panel: open the order,
+  change Status to "Cancelled" and save.
+- When you cancel, the stock comes back automatically. You do
+  not have to add it back by hand.
+- If the order was prepaid, refund the money first (see
+  "Refunds" below), then set Status to "Refunded".
+
+REFUNDS
+-------
+- The website does not refund money by itself. Refunds are done
+  by you in the Razorpay dashboard (for prepaid orders).
+- After the refund is done in Razorpay, open the order in the
+  admin panel, set Payment status to "Refunded" and Status to
+  "Refunded", and save.
+- For COD orders there is nothing to refund — just cancel.
+
+RTO (PARCEL CAME BACK)
+----------------------
+- If Delhivery cannot deliver (wrong address, customer not
+  available) the parcel returns to your warehouse. Delhivery
+  will show this. Set the order Status to "RTO".
+- Call the customer, correct the address if needed, and ship
+  it again as a new shipment (re-shipping charges may apply —
+  that is written in your Shipping Policy).
+
+WHAT THE CUSTOMER SEES
+----------------------
+- The customer sees the order and its status on the website
+  under My Profile > My Orders, with Track, Cancel, Write a
+  review and Request replacement buttons at the right stages.
+- Every time you change the status in the admin panel, a record
+  is written automatically in "Order status logs" — who changed
+  it, from what to what, and when. You never need to open that
+  section yourself; it is only a record for checking later.
+
+----------------------------------------------------------------
+PART B. PRODUCTS AND STOCK
+----------------------------------------------------------------
+
+Your products live in CATALOG. There are four connected parts:
+
+1. CATEGORIES — The groups on the shop page.
+   - Now: A2 Cow Ghee, Buffalo Ghee, Gift Sets, Combos.
+   - To add a category: Categories > ADD. Type the Name. The
+     web address name (slug) fills in by itself. Set the order
+     number (Sort order) to decide where it appears. Keep
+     "Is active" ticked.
+   - A new category automatically gets a filter button on the
+     shop page.
+
+2. PRODUCTS — One product is one type of ghee.
+   - Now: A2 Desi Cow Bilona Ghee 1 Litre, A2 500 ml, Buffalo
+     Bilona Ghee 1 Litre, A2 Ghee Gift Pack, A2 & Buffalo Combo.
+   - Open a product to change its name, category, photo, or
+     whether it is Featured or a Bestseller (those two ticks
+     decide which products appear in the Featured section).
+   - "Is active" unticked = the product disappears from the
+     shop but is not deleted. Use this instead of deleting.
+   - Do NOT change the web address name (slug) of a product
+     that is already on the website — its links will break.
+
+3. PRODUCT VARIANTS — The sizes and prices of a product.
+   - A product can have many variants (example: 500 ml and
+     1 litre). Each variant has its own price, MRP (cut price),
+     stock quantity and weight.
+   - Price is what the customer pays. MRP is the higher price
+     shown as "was". GST (5%) is already included in the price.
+   - Stock is the number of jars you have. When it reaches 0,
+     the size cannot be ordered.
+   - Weight in grams matters: the website checks whether
+     Delhivery can deliver that weight to the customer's
+     pincode, and heavy combos cost more to ship.
+
+4. BATCHES — Which jars you made, and when they expire.
+   - Every variant has batches. A batch has a batch number,
+     the date it was made, the date it expires, and how many
+     jars are in it.
+   - Shelf life is 9 months from the date of manufacture.
+   - The website always sells the oldest batch first (oldest
+     expiry first). You do not have to choose.
+   - If a batch is within 60 days of expiry, the admin panel
+     shows a "near expiry" warning. Sell those jars first or
+     take them off sale.
+   - To add new stock: open the variant, go to the Batches
+     section at the bottom, add a row with the new batch number,
+     dates and quantity, and save.
+
+5. COMBOS — A combo is a pack of two or more products.
+   - A combo has NO stock of its own. Its stock is calculated
+     automatically from its parts. Example: if a combo has
+     1 x A2 1 Litre (stock 10) and 1 x Buffalo 500 ml
+     (stock 4), the combo stock is 4. When a combo is sold, the
+     stock of both parts goes down by itself.
+   - To make a combo: open the combo's variant, go to the
+     "Combo components" section at the bottom, add one row per
+     part (choose the part's variant and its quantity).
+   - Bundle discount: set "Bundle discount percent" on the
+     combo variant (example: 10 means the combo costs 10% less
+     than buying the parts separately). After changing it, tell
+     your developer to run the reprice command, or the price on
+     the website will not update.
+   - Pre-order: if a product is not ready yet, tick
+     "Is preorder" and set a "Dispatch date". Customers can buy
+     it, but no stock is checked, and the website will show it
+     as a pre-order.
+
+6. PHOTOS — Inside a product, at the bottom, there is a
+   "Product images" section. Add a row per photo, upload the
+   photo, and save. The first photo is the main photo. Use
+   clear photos of the actual jar — the website currently shows
+   sample photos which should be replaced with real ones.
+
+LOW STOCK WARNINGS
+------------------
+- The admin panel marks a variant as low stock when its
+  quantity falls below the limit. Check this every morning
+  (see your daily routine). There is also a command your
+  developer can run that lists everything low on stock.
+
+----------------------------------------------------------------
+PART C. PRICES AND OFFERS — COUPONS
+----------------------------------------------------------------
+
+- Go to ORDERS > Coupons. The seeded coupon is WELCOME10
+  (10% off, up to Rs. 300).
+- To make a new offer: Coupons > ADD.
+  - Code: the word the customer types at checkout
+    (example: DIWALI10). Keep it short, capital letters.
+  - Discount type: Percent (%) or Flat Rs.
+  - Value: 10 means 10% off, or Rs. 10 off.
+  - Min order value: the smallest order this coupon works on.
+    Leave 0 if there is no minimum.
+  - Max discount: the most discount one order can get. Leave
+    blank if there is no limit.
+  - Valid from / Valid to: the dates the offer runs. Leave
+    blank if it never expires.
+  - Usage limit: how many times the coupon can be used in
+    total. Leave blank for unlimited.
+  - Is active: untick to stop the offer without deleting it.
+- "Used count" increases by itself every time a customer uses
+  the coupon. Do not change it by hand.
+
+----------------------------------------------------------------
+PART D. REVIEWS — WHAT CUSTOMERS SAY
+----------------------------------------------------------------
+
+- Go to CATALOG > Reviews. Every review a customer writes
+  comes here first. It does NOT show on the website until you
+  approve it.
+- To approve: tick "Is approved" on the review (you can tick
+  it directly in the list — no need to open each review) and
+  save. To reject a fake or abusive review, leave it
+  unapproved or delete it.
+- "Is verified" means the buyer really bought and received
+  that product. The website sets this by itself — do not
+  change it by hand.
+- Reviews have one overall star rating (1 to 5) and three
+  separate ratings: taste, packaging and delivery. There are
+  also tags (words like "packaging" or "delivery") so a late
+  courier does not look like bad ghee.
+- One customer can write only one review per product. If they
+  write again, it edits their old review and it needs approval
+  again.
+- Combo buyers can review the combo AND each product inside
+  it, separately. The website shows both together on the combo
+  page without counting any review twice.
+- Customers who received a gift get a review link 3 days after
+  delivery. Your developer can list who is due for a link and
+  send it by SMS or WhatsApp.
+
+----------------------------------------------------------------
+PART E. THE WORDS ON THE WEBSITE — POLICIES, FAQS AND MORE
+----------------------------------------------------------------
+
+Everything in CONTENT changes the words on the website. No code
+is needed.
+
+1. POLICIES — Terms & Conditions, Privacy Policy, Shipping
+   Policy, Cancellation Policy, Return & Refund Policy.
+   - Open CONTENT > Policies, click a policy, edit the text,
+     save. The website shows the new text.
+   - IMPORTANT: each policy is stored in TWO places — here in
+     the admin panel, and as a copy inside the website files so
+     the page also works before the backend is live. When you
+     change a policy here, tell your developer the same day so
+     he updates the website copy too. If only one copy is
+     changed, the website and the admin panel will show
+     different words.
+   - The return policy says: damaged or missing jars must be
+     reported within 5 days of delivery, spoiled ghee within 10
+     days. Keep those numbers as they are unless your developer
+     tells you they changed — Razorpay and customers rely on
+     them.
+
+2. FAQS — The questions and answers on the Contact page.
+   - Open CONTENT > FAQs > ADD. Type the Question and the
+     Answer, set the order number (Sort order), keep
+     "Is active" ticked, save. It appears on the website.
+   - Untick "Is active" to hide a question without deleting it.
+
+3. ANNOUNCEMENTS — The message bar at the very top of the
+   website (example: "Free delivery above Rs. 1,499").
+   - Open CONTENT > Announcements > ADD. Type the Text, set
+     the order number, keep "Is active" ticked, save.
+   - Untick "Is active" to hide an announcement. Delete it to
+     remove it completely.
+
+4. SITE SETTINGS — Your contact details and social links.
+   - Open CONTENT > Site settings. These are the keys:
+       contact_email  — the support email shown on the website
+                        (support@real100agroindia.com)
+       contact_phone  — the phone number shown on the website
+                        (+91 94131 75726)
+       instagram_url  — your Instagram page link
+       facebook_url   — your Facebook page link
+       youtube_url    — your YouTube channel link
+       whatsapp_url   — your WhatsApp link
+       x_url          — your X (Twitter) link
+   - To change a value, click the key, change the Value, save.
+     The website shows the new email/phone/link everywhere at
+     once. Do NOT change the key itself — only the value.
+   - If a social link is empty, the icon in the footer goes
+     nowhere. Fill in the real links before launch.
+
+5. What you CANNOT change from the admin panel:
+   - The four trust badges on the product page (FSSAI Certified,
+     Lab Tested, Good for Health, 100% Natural) and the ISO /
+     HACCP logos in the footer are image files. To change one,
+     give the new image to your developer.
+   - The big photos, the ghee journey pictures and the videos
+     are also files, not admin content.
+
+----------------------------------------------------------------
+PART F. MESSAGES FROM CUSTOMERS
+----------------------------------------------------------------
+
+1. CONTACT MESSAGES — Messages sent from the Contact page form.
+   - Open CONTENT > Contact messages. You will see the name,
+     email, phone and message of each customer.
+   - Reply to the customer by email or phone (the admin panel
+     does not send the reply for you).
+   - After replying, tick "Is replied" on that message and
+     save, so you know it is done. You can filter the list to
+     show only unreplied messages.
+
+2. NEWSLETTER SUBSCRIBERS — People who signed up for offers.
+   - Open CONTENT > Newsletter subscribers. It is only a list
+     of email addresses with dates. You cannot send emails from
+     here — export or copy the list when you want to send an
+     offer mail.
+
+----------------------------------------------------------------
+PART G. CUSTOMERS
+----------------------------------------------------------------
+
+- ACCOUNTS > Users: every customer who logged in with a mobile
+  number. You can see their phone, name, email and joining
+  date. You cannot see their OTP or password — there is none
+  stored. Do not change a customer's phone number here; if a
+  customer changes their number, they should log in with the
+  new number.
+- ACCOUNTS > Addresses: the saved delivery addresses of
+  customers. Customers add and change these themselves from
+  their profile page. You will normally only open this to check
+  an address for a problem order.
+
+----------------------------------------------------------------
+PART H. REPLACEMENTS — DAMAGED OR LEAKING JARS
+----------------------------------------------------------------
+
+- If a jar arrives leaked or damaged, the customer asks for a
+  replacement from their "My Orders" page. It comes to
+  ORDERS > Replacements.
+- Open the replacement. You will see which order, which jar,
+  and the reason (leaked, damaged, wrong item, or other).
+- Steps:
+  1. Check the photos the customer sent (they were asked to
+     send the order number, invoice, one photo of the outer
+     box and two clear photos of the jar).
+  2. If it is genuine, set Status to "Approved", pack a new
+     jar of the same product and size, and ship it.
+  3. When the new jar is shipped, set Status to "Shipped".
+  4. If the claim is not genuine, set Status to "Rejected"
+     and tell the customer why.
+- A replacement replaces only the damaged jar, never the whole
+  order. For a combo, only the damaged part is replaced.
+- If you cannot replace the jar at all, refund the money
+  instead (see Refunds in Part A) and set the order Status to
+  "Refunded".
+
+----------------------------------------------------------------
+PART I. MONEY — WHAT HAPPENS BY ITSELF, WHAT YOU DO
+----------------------------------------------------------------
+
+Happens by itself (do not do it by hand):
+  - Stock goes down when an order is placed, and comes back
+    when an order is cancelled.
+  - GST (5%) is included in the price; the tax part is shown
+    on the invoice.
+  - Free delivery above Rs. 1,499, else Rs. 79 shipping — the
+    website adds it at checkout.
+  - A prepaid order is marked "Paid" by itself when Razorpay
+    confirms the payment.
+  - The order number, the status history and the "used count"
+    of coupons are all automatic.
+
+You do by hand:
+  - Refunds in the Razorpay dashboard, then mark the order
+    "Refunded" in the admin panel.
+  - Delhivery booking and AWB entry (see Part A, step 4).
+  - Anything about cash: COD money is collected by the courier
+    and comes to your bank through Delhivery — the website does
+    not collect it.
+
+----------------------------------------------------------------
+PART J. THINGS YOU MUST BE CAREFUL WITH
+----------------------------------------------------------------
+
+  1. Never change the web address name (slug) of a product,
+     category or policy that is already live. Its links will
+     break and customers will see "page not found".
+  2. Never delete a product, category or policy that has orders.
+     Untick "Is active" instead — it hides it safely.
+  3. Never change an order's items or prices by hand. The order
+     items are locked after the order is placed. If an order is
+     wrong, cancel it and ask the customer to order again.
+  4. Never tick "Is verified" on a review by hand. The website
+     sets it only for delivered orders.
+  5. Never change a policy in the admin panel without telling
+     your developer the same day (see Part E, point 1).
+  6. The demo login code (1234) works only on the developer's
+     test computer. It never works on the live website, and
+     nobody must ever switch it on there.
+  7. Your admin username and password are yours alone. Do not
+     share them. If someone else needs access, ask your
+     developer to make them their own login.
+
+----------------------------------------------------------------
+PART K. IF SOMETHING GOES WRONG
+----------------------------------------------------------------
+
+  - "A change I made does not show on the website":
+    Did you click SAVE? Wait one minute and refresh the page.
+    If it still does not show, the backend may not be deployed
+    yet — tell your developer.
+  - "A customer says the website shows the wrong price":
+    Check the variant's Price in the admin panel. The website
+    shows the variant price, not the product's old price.
+  - "An order is stuck on Placed but the customer paid":
+    Check Payment status on the order. If it says "Failed",
+    the payment did not go through — ask the customer to order
+    again. If it says "Paid" and the status is still "Placed",
+    just move it to "Confirmed" yourself.
+  - "The website shows 'Loading' on a policy page":
+    Tell your developer. The static copy of the policy may be
+    missing on that page.
+  - "I cannot log in to the admin panel":
+    Check that you are using the admin username and password,
+    not a customer mobile number. If you forgot the password,
+    your developer must reset it — it cannot be reset by email.
+  - For anything else, note the exact page, the exact words on
+    the screen, and the order number if there is one, and send
+    them to your developer.
+
+----------------------------------------------------------------
+QUICK REFERENCE — ORDER STATUSES AT A GLANCE
+----------------------------------------------------------------
+
+  Placed      New order, not yet accepted by you
+  Confirmed   You accepted it, about to pack
+  Packed      Packed and ready to hand to Delhivery
+  Shipped     With Delhivery, AWB number entered
+  Delivered   Customer received it
+  Cancelled   Order cancelled before delivery
+  Refunded    Money returned to the customer
+  RTO         Parcel returned to your warehouse
+
+Payment statuses: Pending, Paid, Failed, Refunded.
+Payment methods: COD (Cash on Delivery), Prepaid (Razorpay).
+
+----------------------------------------------------------------
+YOUR BUSINESS DETAILS (AS THEY ARE ON THE WEBSITE)
+----------------------------------------------------------------
+
+  Business:  Real 100 Agro India Pvt Ltd
+  Address:   Killa No. 1250, Raghu Nagar, Rohtak Road,
+             Near New Anaj Mandi, Jind, Haryana 126102
+             (office and warehouse are the same place)
+  Email:     support@real100agroindia.com
+  Phone:     +91 94131 75726
+  FSSAI Lic. No.: 10821008000026
+  GSTIN:     06AAKCR6284N1ZM
+  Grievance Officer: Sahil
+  Hours:     Monday to Saturday, 10:00 am to 6:00 pm IST
+  Delivery:  Free above Rs. 1,499, else Rs. 79
+  Courier:   Delhivery | Payments: Razorpay (prepaid) and COD
+
+If any of these details change, update them in Site settings
+and in the Terms & Conditions policy — and tell your developer
+so the website copy is updated too.
+
+================================================================
+  End of guide. Keep this file safe and share it only with
+  people who run the shop.
+================================================================

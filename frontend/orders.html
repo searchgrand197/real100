@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Orders — real100agro</title>
+  <meta name="description" content="Track, cancel, or request a replacement for your real100agro orders.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/pages.css">
+  <link rel="stylesheet" href="assets/css/commerce.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧈</text></svg>">
+</head>
+
+<body class="page-orders">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="announcement-bar" role="note">
+    <span class="announcement-bar__track"><span>Free delivery over ₹1,499 &nbsp;•&nbsp; 100% Desi Cow A2 Ghee
+        &nbsp;•&nbsp; Small-batch Bilona</span><span aria-hidden="true">Free delivery over ₹1,499 &nbsp;•&nbsp; 100% Desi
+        Cow A2 Ghee &nbsp;•&nbsp; Small-batch Bilona</span></span>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="real100agro home">
+        <img class="logo__image" src="assets/images/logo.png" alt="real100agro" width="160" height="48">
+        <span class="logo__text">real100agro</span>
+      </a>
+      <nav class="main-nav" id="main-nav" data-main-nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="products.html#all" data-nav-products="all">All Products</a>
+        <a href="products.html#bestsellers" data-nav-products="bestseller">Bestsellers</a>
+        <a href="our-story.html">Our Story</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+      <form class="search-form" data-search-form role="search" aria-label="Search products">
+        <label class="visually-hidden" for="site-search">Search products</label>
+        <input id="site-search" type="search" data-search-input placeholder="Search products…" autocomplete="off">
+        <button class="search-form__button" type="submit" aria-label="Search products">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.5-3.5"></path>
+          </svg>
+        </button>
+      </form>
+      <button class="cart-button" type="button" data-cart-count aria-label="Cart, 0 items">
+        <span class="cart-button__face" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+        </span>
+        <span class="cart-button__count" data-cart-count-number>0</span>
+      </button>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav"
+        aria-label="Open menu">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main" class="page-shell">
+    <header class="page-hero">
+      <div class="container content page-hero__inner">
+        <p class="section__eyebrow section__eyebrow--center">Account</p>
+        <h1 class="page-hero__title">Orders</h1>
+        <p class="page-hero__lead">Track a delivery, cancel before dispatch, or ask for a replacement jar.</p>
+        <nav class="account-nav" aria-label="Account pages">
+          <a class="pill" href="profile.html">My Profile</a>
+          <a class="pill" href="orders.html" aria-current="page">Orders</a>
+          <a class="pill" href="addresses.html">Saved Addresses</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="section" aria-label="Orders">
+      <div class="container content profile-layout">
+        <div class="profile-card" id="orders" data-profile-orders>
+          <h2>My orders</h2>
+          <div data-profile-orders-body></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="assets/images/logo.png" alt="real100agro" width="160" height="48">
+          <span class="footer-logo__text">real100agro</span>
+          <p>Pure desi cow A2 ghee, made the bilona way — from small farms to your kitchen.</p>
+          <p class="footer-cert">
+            <img src="assets/images/iso.svg" alt="ISO 9001:2015 certified" width="40" height="40" loading="lazy">
+            <img src="assets/images/haccp.svg" alt="HACCP food safety system" width="40" height="40" loading="lazy">
+            <span>FSSAI Lic. No. 10821008000026 &nbsp;•&nbsp; GSTIN 06AAKCR6284N1ZM</span>
+          </p>
+        </div>
+        <nav aria-label="Shop links">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="products.html#all">All Products</a></li>
+            <li><a href="products.html#bestsellers">Bestsellers</a></li>
+            <li><a href="products.html?filter=gift">Gift Sets</a></li>
+            <li><a href="products.html?filter=combo">Combos</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Company links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="index.html#process">Ghee Journey</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faqs">FAQs</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Policies">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="policy.html?slug=privacy-policy">Privacy Policy</a></li>
+            <li><a href="policy.html?slug=terms">Terms &amp; Conditions</a></li>
+            <li><a href="policy.html?slug=shipping">Shipping Policy</a></li>
+            <li><a href="policy.html?slug=refund">Return &amp; Refund Policy</a></li>
+            <li><a href="policy.html?slug=cancellation">Cancellation Policy</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3>Stay in touch</h3>
+          <p>New batches, festive packs and offers.</p>
+          <form class="newsletter-form" data-newsletter-form>
+            <label class="visually-hidden" for="newsletter-email">Email address</label>
+            <input id="newsletter-email" type="email" name="email" placeholder="Your email address" required
+              autocomplete="email">
+            <button class="button button--gold" type="submit">Subscribe</button>
+          </form>
+          <p class="form-message" data-newsletter-message role="status"></p>
+        </div>
+      </div>
+      <p class="footer-bottom">© 2026 real100agro &nbsp;•&nbsp; Pure Desi Cow A2 Ghee &nbsp;•&nbsp; Made with care in
+        India</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/api.js" defer></script>
+    <script src="assets/js/store.js" defer></script>
+  <script src="assets/js/commerce.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/content.js" defer></script>
+  <script src="assets/js/profile.js" defer></script>
+</body>
+
+</html>

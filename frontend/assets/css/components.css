@@ -1,0 +1,1038 @@
+/* Shared components: buttons, pills, cards, header, footer.
+   Colours come from tokens.css only. */
+
+/* Buttons — use .button (or .pill) and the position-aware ripple
+   is applied automatically by main.js. New CTAs only need those
+   classes; no per-button hover CSS required. */
+.button {
+  --button-ripple: var(--color-surface-white);
+  --button-hover-color: var(--color-text);
+  --button-hover-border: var(--color-text);
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  overflow: hidden;
+  padding: 13px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  transition: color 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.button--primary {
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
+}
+
+.button--outline {
+  --button-ripple: var(--color-primary-maroon);
+  --button-hover-color: var(--color-surface-white);
+  --button-hover-border: var(--color-primary-maroon);
+  background-color: var(--color-surface-white);
+  color: var(--color-button-outline);
+  border-color: var(--color-button-outline);
+}
+
+.button--gold {
+  --button-ripple: var(--color-primary-maroon);
+  --button-hover-color: var(--color-surface-white);
+  --button-hover-border: var(--color-primary-maroon);
+  background-color: var(--color-accent-gold);
+  color: var(--color-text-ink);
+}
+
+.button--full {
+  width: 100%;
+}
+
+.button--rect {
+  border-radius: 0;
+}
+
+.button--small {
+  padding: 10px 16px;
+  font-size: 0.875rem;
+}
+
+/* Pills / filters */
+.pill {
+  --button-ripple: var(--color-surface-white);
+  --button-hover-color: var(--color-text);
+  --button-hover-border: var(--color-text);
+  position: relative;
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px 18px;
+  border: 1px solid var(--color-pill-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-pill-bg);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.9375rem;
+  transition: color 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.pill[aria-pressed="true"] {
+  --button-ripple: var(--color-surface-white);
+  --button-hover-color: var(--color-text);
+  --button-hover-border: var(--color-text);
+  background-color: var(--color-pill-active-bg);
+  border-color: var(--color-pill-active-bg);
+  color: var(--color-pill-active-text);
+}
+
+.pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+}
+
+/* Position-aware hover ripple (btn-6 style).
+   Span is injected by main.js — keep markup free of ripple nodes.
+   Animate scale (not width/height) so rapid hover in/out stays smooth;
+   left/top only update while the ripple is at rest (scale 0). */
+.button__ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: var(--button-ripple, var(--color-surface-white));
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.button__ripple.is-on {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.button:hover,
+.pill:hover {
+  color: var(--button-hover-color);
+  border-color: var(--button-hover-border);
+  box-shadow: 0 8px 20px rgba(46, 27, 18, 0.12);
+}
+
+/* Icon chrome: hamburger / search / carousel keep ripple + ink icons.
+   Cart is separate — its count badge must not share overflow:hidden. */
+.nav-toggle,
+.search-form__button,
+.carousel-controls button {
+  --button-ripple: var(--color-primary-maroon);
+  --button-hover-color: var(--color-surface-white);
+  --button-hover-border: var(--color-primary-maroon);
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  transition: color 0.35s ease, border-color 0.35s ease,
+    background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.nav-toggle:hover,
+.search-form__button:hover,
+.carousel-controls button:hover {
+  color: var(--button-hover-color);
+  border-color: var(--button-hover-border);
+  box-shadow: 0 8px 20px rgba(46, 27, 18, 0.12);
+}
+
+.nav-toggle:hover .nav-toggle__bar {
+  background-color: var(--color-surface-white);
+}
+
+.search-form__button:hover {
+  /* Keep vertical centering from the search form layout. */
+  transform: translateY(-50%);
+}
+
+.video-frame__play,
+.video-card__play {
+  --button-ripple: var(--color-surface-white);
+  --button-hover-color: var(--color-text);
+  --button-hover-border: var(--color-text);
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  transition: color 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.video-frame__play:hover,
+.video-card__play:hover {
+  color: var(--button-hover-color);
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--button-hover-border);
+  box-shadow: 0 8px 20px rgba(46, 27, 18, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button__ripple {
+    transition: none;
+    will-change: auto;
+  }
+}
+
+/* Announcement bar — static and centred on desktop. On phones it
+   becomes a marquee (see responsive.css): the track holds the text
+   twice, and scrolling it -50% loops seamlessly, so it never wraps
+   to two lines. The second copy is hidden on desktop. */
+.announcement-bar {
+  padding: 10px var(--space-2);
+  background-color: var(--color-primary-maroon);
+  color: var(--color-text-on-maroon);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+}
+
+.announcement-bar__track {
+  display: inline;
+}
+
+.announcement-bar__track span + span {
+  display: none;
+}
+
+@keyframes announcement-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Header — floating glassmorphism pill. Sticky shell sits inset
+   from the viewport edges; .header-inner is the frosted pill.
+   Row never wraps when closed: logo, nav, search, cart, hamburger.
+   No Shop Ghee button here — the hero CTA covers it. */
+.site-header {
+  position: sticky;
+  top: 14px;
+  z-index: 50;
+  width: calc(100% - 48px);
+  max-width: var(--content-max-width);
+  margin: 12px auto 0;
+  background-color: transparent;
+  border: none;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Scroll-down: slide the floating pill up and off-screen.
+   Scroll-up / near top / open menu: JS clears .is-hidden. */
+.site-header.is-hidden {
+  transform: translateY(calc(-100% - 28px));
+  pointer-events: none;
+}
+
+.site-header.is-menu-open {
+  transform: none;
+  pointer-events: auto;
+}
+
+.site-header.is-scrolled .header-inner {
+  box-shadow:
+    0 22px 44px rgba(46, 27, 18, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+
+.header-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: var(--space-2);
+  min-height: calc(var(--header-height) - 16px);
+  /* Extra right pad keeps the cart badge inside the pill curve.
+     Overflow stays visible so the account menu can drop below the pill. */
+  padding: 10px 24px 10px 20px;
+  overflow: visible;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, 0.55);
+  background-image: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.72) 0%,
+    rgba(255, 248, 240, 0.45) 55%,
+    rgba(253, 233, 225, 0.35) 100%
+  );
+  -webkit-backdrop-filter: blur(20px) saturate(1.35);
+  backdrop-filter: blur(20px) saturate(1.35);
+  box-shadow:
+    0 18px 40px rgba(46, 27, 18, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Soft theme wave drifting left → right across the pill. */
+.header-inner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    transparent 22%,
+    rgba(253, 233, 225, 0.7) 38%,
+    rgba(242, 211, 138, 0.55) 50%,
+    rgba(249, 217, 206, 0.65) 62%,
+    transparent 78%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  animation: header-wave 10s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+@keyframes header-wave {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -120% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+
+  .header-inner::before {
+    animation: none;
+    opacity: 0.45;
+    background-position: 40% 0;
+  }
+}
+
+.header-inner:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 24px 48px rgba(46, 27, 18, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.header-inner:hover::before {
+  opacity: 1;
+}
+
+.header-inner > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Open account menu paints above cart, search, and the glass wave. */
+.header-inner > .account-menu.is-open {
+  z-index: 6;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  font-size: 1.375rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-maroon);
+  text-decoration: none;
+}
+
+.logo__image {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+/* Text logo is the fallback if logo.png is not in the repo yet;
+   JS adds .logo--image-missing on image error (see main.js). */
+.logo__text {
+  display: none;
+}
+
+.logo--image-missing .logo__image {
+  display: none;
+}
+
+.logo--image-missing .logo__text {
+  display: inline;
+}
+
+.footer-logo {
+  display: block;
+  height: 44px;
+  width: auto;
+  max-width: 170px;
+  object-fit: contain;
+  margin-bottom: var(--space-1);
+}
+
+/* Footer text fallback, same idea as the header: hidden while
+   logo.png loads, shown if it fails (JS adds the class). */
+.footer-logo__text {
+  display: none;
+  margin-bottom: var(--space-1);
+  font-size: 1.375rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary-maroon-dark);
+}
+
+.footer-brand--logo-missing .footer-logo {
+  display: none;
+}
+
+.footer-brand--logo-missing .footer-logo__text {
+  display: block;
+}
+
+.main-nav {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  margin-left: var(--space-2);
+}
+
+.main-nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  overflow: hidden;
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  font-size: 0.9rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.3s ease;
+}
+
+.main-nav a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(122, 30, 45, 0.1),
+    rgba(201, 154, 43, 0.08)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.main-nav a:hover::before {
+  opacity: 1;
+}
+
+.main-nav a:hover {
+  color: var(--color-primary-maroon);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(46, 27, 18, 0.08);
+}
+
+.main-nav a[aria-current="page"] {
+  color: var(--color-primary-maroon);
+  font-weight: var(--font-weight-semibold);
+  background: linear-gradient(
+    135deg,
+    rgba(122, 30, 45, 0.12),
+    rgba(201, 154, 43, 0.1)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 4px 12px rgba(46, 27, 18, 0.06);
+}
+
+/* Search — a direct child of .header-inner (no wrapper), one
+   single bar: input + icon button inside it. Frosted to match
+   the glass pill. It flexes and shrinks, but never past 420px. */
+.search-form {
+  position: relative;
+  flex: 1 1 280px;
+  min-width: 0;
+  max-width: 420px;
+  margin-left: auto;
+}
+
+.search-form input[type="search"] {
+  width: 100%;
+  min-width: 0;
+  padding: 10px 44px 10px 14px;
+  border: 1px solid rgba(234, 211, 198, 0.85);
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 255, 255, 0.55);
+  color: var(--color-text);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.search-form input[type="search"]:focus {
+  border-color: var(--color-primary-maroon);
+  background-color: rgba(255, 255, 255, 0.82);
+}
+
+.search-form__button {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-circle);
+  background-color: transparent;
+  color: var(--color-primary-maroon);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.search-form__button svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Cart — icon face clips its own hover fill; count badge is a sibling
+   so it is never cut by that circle. Header pill keeps overflow:hidden. */
+.cart-button {
+  position: relative;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-primary-maroon);
+  cursor: pointer;
+  overflow: visible;
+}
+
+.cart-button__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: var(--radius-circle);
+  background-color: transparent;
+  color: inherit;
+  transition: background-color 0.35s ease, border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.cart-button:hover {
+  color: var(--color-surface-white);
+}
+
+.cart-button:hover .cart-button__face {
+  background-color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  box-shadow: 0 8px 20px rgba(46, 27, 18, 0.12);
+}
+
+.cart-button__face svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Badge grows into a pill for 2–3 digits; stays a circle for 0–9. */
+.cart-button__count {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border: 2px solid var(--color-surface-white);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-primary-maroon);
+  color: var(--color-surface-white);
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Hamburger — round glass control with maroon bars; morphs to an
+   X while the menu is open (see .site-header.is-menu-open). */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 5px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid rgba(122, 30, 45, 0.18);
+  border-radius: var(--radius-circle);
+  background-color: rgba(122, 30, 45, 0.92);
+  cursor: pointer;
+}
+
+.nav-toggle__bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--color-surface-white);
+  transition: transform 0.3s ease, opacity 0.3s ease,
+    background-color var(--motion-duration) ease;
+  transform-origin: center;
+}
+
+.site-header.is-menu-open .nav-toggle__bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.site-header.is-menu-open .nav-toggle__bar:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-8px);
+}
+
+.site-header.is-menu-open .nav-toggle__bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Product card — warm shop tile matched to cream / blush / maroon /
+   gold theme. Soft radius, quiet border, no glass chrome. */
+.product-card[hidden] {
+  display: none !important;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 14px;
+  border: 1px solid rgba(234, 211, 198, 0.95);
+  border-radius: var(--radius-xlarge);
+  background-color: var(--color-card-bg);
+  background-image: linear-gradient(
+    168deg,
+    var(--color-card-bg) 0%,
+    var(--color-bg-cream) 42%,
+    rgba(253, 233, 225, 0.55) 100%
+  );
+  box-shadow: 0 8px 22px rgba(92, 20, 32, 0.06);
+  transition: transform 0.28s ease, box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(122, 30, 45, 0.28);
+  box-shadow: 0 16px 36px rgba(92, 20, 32, 0.12);
+}
+
+.product-card__media {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 230px;
+  overflow: hidden;
+  border-radius: var(--radius-medium);
+  border: 1px solid rgba(234, 211, 198, 0.8);
+  background:
+    radial-gradient(circle at 30% 20%, rgba(242, 211, 138, 0.45), transparent 55%),
+    var(--color-bg-blush);
+}
+
+.product-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.45s ease;
+}
+
+.product-card:hover .product-card__media img {
+  transform: scale(1.04);
+}
+
+.product-card__badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-badge-sale-bg);
+  color: var(--color-badge-sale-text);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.product-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: var(--space-2) 0 6px;
+}
+
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star-rating__star {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+}
+
+.star-rating__star path {
+  stroke: rgba(122, 30, 45, 0.35);
+  stroke-width: 1;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+.star-rating__star.is-filled path {
+  fill: var(--color-accent-gold);
+  stroke: var(--color-accent-gold);
+}
+
+.star-rating__star.is-empty path {
+  fill: rgba(234, 211, 198, 0.9);
+  stroke: rgba(122, 30, 45, 0.2);
+}
+
+.product-card__review-count {
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+}
+
+.product-card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card__name {
+  margin: 0 0 var(--space-1);
+  color: var(--color-primary-maroon-dark);
+  font-family: var(--font-family-display);
+  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.35;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.product-card__name a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-card__name a:hover,
+.product-card__name a:focus-visible {
+  color: var(--color-primary-maroon);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.product-card__price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0 0 var(--space-2);
+}
+
+.product-card__price .price--old {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  font-size: 0.875rem;
+}
+
+.product-card__price .price--now {
+  color: var(--color-primary-maroon);
+  font-size: 1.0625rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.product-card__price .price--off {
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(122, 30, 45, 0.08);
+  color: var(--color-primary-maroon);
+  font-size: 0.6875rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+}
+
+.product-card .button--full {
+  margin-top: auto;
+}
+
+/* Product grid — shared by homepage featured strip and products page.
+   Flex fallback first, grid when supported. */
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.product-grid > * {
+  flex: 1 1 240px;
+}
+
+@supports (display: grid) {
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .product-grid > * {
+    flex: none;
+  }
+}
+
+.view-more-row {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-4);
+}
+
+/* Footer — Kasutam-style: full-bleed illustrated background.
+   Links sit in the open cream sky; churn / hut / cow keep a
+   clear band at the bottom. Cream is the load fallback. */
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  color: var(--color-text-ink);
+  background-color: var(--color-footer-bg);
+  background-image: url("../images/footer_background.webp");
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  /* Nudge up 1px so subpixel / image-edge hairlines cannot show
+     body color between the previous section and the footer art. */
+  margin-top: -1px;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
+  /* Leave the illustrated ground free of text */
+  padding-bottom: clamp(11rem, 22vw, 16rem);
+}
+
+.site-footer > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer a {
+  color: var(--color-primary-maroon);
+}
+
+.site-footer h2,
+.site-footer h3 {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-family-display);
+  color: var(--color-primary-maroon-dark);
+}
+
+/* Footer certifications: ISO + HACCP badges with FSSAI / GSTIN. */
+.footer-cert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  font-size: 0.85rem;
+}
+
+.footer-cert img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+@media (max-width: 767px) {
+  .site-footer {
+    padding-bottom: 12rem;
+    background-position: 60% bottom;
+  }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.8fr 0.9fr 1.15fr 1.3fr;
+  gap: var(--space-4);
+  align-items: start;
+  margin-bottom: var(--space-4);
+}
+
+.footer-brand p {
+  max-width: 28ch;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.footer-grid ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-grid li {
+  margin-bottom: 10px;
+}
+
+.footer-grid a {
+  text-decoration: none;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-grid a:hover,
+.footer-grid a:focus-visible {
+  color: var(--color-primary-maroon-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-grid p {
+  color: var(--color-text-muted);
+}
+
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-top: 1px solid rgba(92, 20, 32, 0.18);
+  border-radius: var(--radius-pill);
+  background-color: rgba(255, 248, 240, 0.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  text-align: center;
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.newsletter-form input[type="email"] {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 12px 16px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-white);
+  color: var(--color-text);
+  box-shadow: 0 1px 0 rgba(46, 27, 18, 0.04);
+}
+
+.form-message {
+  margin-top: var(--space-1);
+  font-size: 0.875rem;
+}
+
+/* Social icons under newsletter — circular chips in brand maroon/gold. */
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: var(--space-3);
+}
+
+.footer-social__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-circle);
+  border: 1px solid rgba(122, 30, 45, 0.22);
+  background-color: rgba(255, 253, 249, 0.88);
+  color: var(--color-primary-maroon);
+  box-shadow: 0 1px 0 rgba(46, 27, 18, 0.04);
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-social__link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.footer-grid .footer-social__link:hover,
+.footer-grid .footer-social__link:focus-visible {
+  background-color: var(--color-primary-maroon);
+  border-color: var(--color-primary-maroon);
+  color: var(--color-surface-white);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.footer-social__link:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}

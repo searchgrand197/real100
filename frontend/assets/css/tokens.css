@@ -1,0 +1,112 @@
+/* ==========================================================================
+   real100agro — design tokens
+   --------------------------------------------------------------------------
+   Change the theme here, in this file only. Every other stylesheet uses
+   var(--...) references, so a colour, text colour or background colour
+   changed here updates the whole homepage at once.
+
+   Palette: Indomade-inspired blush / gold / maroon (from the Figma
+   Brand / Colour variables). Layout, sections and cards follow Kasutam.
+   Product range is ghee only.
+   ========================================================================== */
+
+:root {
+  /* Brand colours — the single source of truth for colour */
+  --color-bg-cream: #fff8f0;
+  --color-bg-blush: #fde9e1;
+  --color-bg-pink: #f9d9ce;
+  --color-primary-maroon: #7a1e2d;
+  --color-primary-maroon-dark: #5c1420;
+  --color-accent-gold: #c99a2b;
+  --color-accent-gold-light: #f2d38a;
+  --color-text-ink: #2e1b12;
+  --color-text-muted: #7a5c4e;
+  --color-surface-white: #ffffff;
+  --color-line: #ead3c6;
+  --color-leaf: #6f7d3a;
+
+  /* Journey gradient washes — moved here from home.css so the
+     theme stays central. Values are exactly the colours that
+     were hard-coded in the journey gradients; no design change. */
+  --color-journey-wash-1: #fff1e4;
+  --color-journey-wash-2: #fce0d4;
+  --color-journey-wash-3: #f3cfc0;
+  --color-journey-wash-4: #f0d7a8;
+  --color-journey-wash-5: #e8c48a;
+  --color-journey-wash-6: #d4a574;
+  --color-journey-wash-7: #e8b4a4;
+  --color-journey-wash-8: #c97a6e;
+  /* Discount / price-off pill — moved here from home.css.
+     Kept separate from --color-badge-sale-bg (maroon) so the
+     sale badge colour does not change. */
+  --color-badge-off-bg: #e85a4f;
+
+  /* Semantic aliases — components use these, never raw hex values */
+  --color-page-bg: var(--color-bg-cream);
+  --color-section-cream: var(--color-bg-cream);
+  --color-section-blush: var(--color-bg-blush);
+  --color-section-pink: var(--color-bg-pink);
+  --color-header-bg: var(--color-surface-white);
+  --color-footer-bg: var(--color-bg-cream);
+  --color-text: var(--color-text-ink);
+  --color-text-heading: var(--color-text-ink);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-on-dark: var(--color-surface-white);
+  --color-text-on-maroon: var(--color-surface-white);
+  --color-link: var(--color-primary-maroon);
+  --color-button-bg: var(--color-primary-maroon);
+  --color-button-bg-hover: var(--color-primary-maroon-dark);
+  --color-button-text: var(--color-surface-white);
+  --color-button-outline: var(--color-primary-maroon);
+  --color-badge-sale-bg: var(--color-primary-maroon);
+  --color-badge-sale-text: var(--color-surface-white);
+  --color-badge-hero-bg: var(--color-accent-gold);
+  --color-card-bg: #fffdf9;
+  --color-card-border: var(--color-line);
+  --color-pill-active-bg: var(--color-primary-maroon);
+  --color-pill-active-text: var(--color-surface-white);
+  --color-pill-bg: transparent;
+  --color-pill-border: var(--color-line);
+  --color-focus-ring: var(--color-accent-gold);
+  --color-accent-slot-bg: var(--color-bg-blush);
+
+  /* Typography */
+  --font-family-base: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-family-display: "Fraunces", "Times New Roman", Georgia, serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-body: 1.6;
+  --line-height-heading: 1.15;
+
+  /* Shape */
+  --radius-small: 12px;
+  --radius-medium: 16px;
+  --radius-large: 20px;
+  --radius-xlarge: 28px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* Spacing (8px scale) */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 80px;
+
+  /* Layout */
+  --container-max-width: 1440px;
+  --content-max-width: 1296px;
+  /* Floating glass pill is a bit shorter than the old solid bar. */
+  --header-height: 76px;
+  /* Announcement bar: 10px padding × 2 + ~1 line of 0.8125rem text. */
+  --announcement-height: 38px;
+
+  /* Motion */
+  --motion-duration: 0.2s;
+  --motion-hero-ring-duration: 120s;
+}

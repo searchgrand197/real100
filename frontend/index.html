@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>real100agro — Pure Desi Cow A2 Ghee, Made the Bilona Way</title>
+  <meta name="description"
+    content="Pure desi cow A2 ghee, hand-churned the traditional bilona way from grass-fed desi cow milk. No additives, no shortcuts — just golden, grainy ghee.">
+  <meta property="og:title" content="real100agro — Pure Desi Cow A2 Ghee">
+  <meta property="og:description"
+    content="Hand-churned from grass-fed desi cow milk. No additives, no shortcuts — just golden, grainy ghee the traditional way.">
+  <meta property="og:type" content="website">
+  <!-- Product prices, reviews, videos and photos on this page are
+       placeholders for the frontend phase. Replace them with real
+       product data in the backend phase; do not publish fake
+       Product structured data until then. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "real100agro",
+    "description": "Desi cow A2 ghee selling webapp"
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/commerce.css">
+  <link rel="stylesheet" href="assets/css/responsive.css">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧈</text></svg>">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Announcement bar: Kasutam layout, our maroon theme -->
+  <div class="announcement-bar" role="note">
+    <span class="announcement-bar__track"><span>Free delivery over ₹1,499 &nbsp;•&nbsp; 100% Desi Cow A2 Ghee
+        &nbsp;•&nbsp; Small-batch Bilona</span><span aria-hidden="true">Free delivery over ₹1,499 &nbsp;•&nbsp; 100% Desi
+        Cow A2 Ghee &nbsp;•&nbsp; Small-batch Bilona</span></span>
+  </div>
+
+  <!-- Header — floating glassmorphism pill (CodePen-inspired):
+       logo, nav, search, cart, hamburger. Same single-line layout
+       and data hooks as before; only the shell is floating glass.
+       On phones the search folds into the open menu. No Shop Ghee
+       button here — the hero CTA already leads to products.
+       Nav links point at shared pages: products.html (All /
+       Bestsellers tabs), our-story.html, contact.html. -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html" aria-label="real100agro home">
+        <img class="logo__image" src="assets/images/logo.png" alt="real100agro" width="160" height="48">
+        <span class="logo__text">real100agro</span>
+      </a>
+      <nav class="main-nav" id="main-nav" data-main-nav aria-label="Main navigation">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="products.html#all" data-nav-products="all">All Products</a>
+        <a href="products.html#bestsellers" data-nav-products="bestseller">Bestsellers</a>
+        <a href="our-story.html">Our Story</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+      <!-- Search is a direct header child: on phones it hides in the
+           closed header and shows inside the open menu; cart stays. -->
+      <form class="search-form" data-search-form role="search" aria-label="Search products">
+        <label class="visually-hidden" for="site-search">Search products</label>
+        <input id="site-search" type="search" data-search-input placeholder="Search products…" autocomplete="off">
+        <button class="search-form__button" type="submit" aria-label="Search products">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="11" cy="11" r="7"></circle>
+            <path d="M20 20l-3.5-3.5"></path>
+          </svg>
+        </button>
+      </form>
+      <button class="cart-button" type="button" data-cart-count aria-label="Cart, 0 items">
+        <span class="cart-button__face" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+        </span>
+        <span class="cart-button__count" data-cart-count-number>0</span>
+      </button>
+      <button class="nav-toggle" type="button" data-nav-toggle aria-expanded="false" aria-controls="main-nav"
+        aria-label="Open menu">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO — cinematic prototype (Henrietta-inspired): full-bleed
+         atmosphere, giant brand type behind the jar, floating story
+         motifs (adult cow, bilona churner, grass, matki, jar) with
+         parallax, slim CTA. Conversion details live in Featured
+         Products below. -->
+    <section class="hero hero--cinematic" id="top" aria-labelledby="hero-heading" data-hero-cinematic>
+      <div class="hero-atmosphere" aria-hidden="true"></div>
+
+      <div class="hero-stage" data-hero-stage>
+        <p class="hero-brand" aria-hidden="true">real100agro</p>
+
+        <h1 class="hero-display" id="hero-heading">
+          <span class="hero-display__line">Pure Desi</span>
+          <span class="hero-display__line hero-display__line--accent">A2 Ghee</span>
+        </h1>
+
+        <div class="hero-glow" aria-hidden="true"></div>
+
+        <div class="hero-droplets hero-droplets--back" data-hero-droplets aria-hidden="true">
+          <span class="hero-drop" data-depth="0.35" style="--x:18%; --y:42%; --s:1.05; --o:.9">
+            <img src="assets/images/hero_float_grass.png" alt="" width="120" height="120" decoding="async">
+          </span>
+          <span class="hero-drop" data-depth="0.4" style="--x:78%; --y:44%; --s:1; --o:.88">
+            <img src="assets/images/hero_float_matki.png" alt="" width="120" height="120" decoding="async">
+          </span>
+        </div>
+        <div class="hero-droplets hero-droplets--front" data-hero-droplets aria-hidden="true">
+          <span class="hero-drop" data-depth="0.55" style="--x:5%; --y:18%; --s:1.35; --o:.95">
+            <img src="assets/images/hero_float_cow.png" alt="" width="160" height="160" decoding="async">
+          </span>
+          <span class="hero-drop" data-depth="0.7" style="--x:10%; --y:68%; --s:1.15; --o:.92">
+            <img src="assets/images/hero_float_churner.png" alt="" width="120" height="120" decoding="async">
+          </span>
+          <span class="hero-drop" data-depth="0.6" style="--x:88%; --y:16%; --s:1.05; --o:.94">
+            <img src="assets/images/hero_float_jar.png" alt="" width="120" height="120" decoding="async">
+          </span>
+        </div>
+
+        <div class="hero-jar" data-hero-jar>
+          <img src="assets/images/hero_jar_cutout.png" alt="Jar of Real 100 Agro A2 desi cow ghee" width="400"
+            height="600" fetchpriority="high" decoding="async">
+        </div>
+
+        <div class="hero-copy">
+          <p class="hero-copy__support">Hand-churned the bilona way from grass-fed desi cow milk.</p>
+          <div class="hero-ctas">
+            <a class="button button--primary" href="products.html#all">Shop A2 Ghee &nbsp;→</a>
+            <a class="button button--outline" href="our-story.html">Our Story</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-marquee" aria-hidden="true">
+        <div class="hero-marquee__track">
+          <span>100% Desi Cow A2</span>
+          <span>Small-batch Bilona</span>
+          <span>No additives</span>
+          <span>Lab tested</span>
+          <span>Ships across India</span>
+          <span>100% Desi Cow A2</span>
+          <span>Small-batch Bilona</span>
+          <span>No additives</span>
+          <span>Lab tested</span>
+          <span>Ships across India</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PRODUCTS + SHOP BY CATEGORY — merged, Kasutam layout,
+         warm cream/blush shop tiles. Ghee only. -->
+    <section class="section section--featured-products" id="featured-products" aria-labelledby="featured-heading">
+      <div class="container content">
+        <h2 class="section__title section__title--center" id="featured-heading">Featured Products</h2>
+        <p class="section__subtitle section__subtitle--center">Shop By Categories</p>
+        <div class="pill-row products-category-row" role="group" aria-label="Filter products by category">
+          <button class="pill" type="button" data-filter="bestseller" aria-pressed="false">Bestseller</button>
+          <button class="pill" type="button" data-filter="a2" aria-pressed="false">A2 Cow Ghee</button>
+          <button class="pill" type="button" data-filter="buffalo" aria-pressed="false">Buffalo Ghee</button>
+          <button class="pill" type="button" data-filter="gift" aria-pressed="false">Gift Sets</button>
+          <button class="pill" type="button" data-filter="combo" aria-pressed="false">Combos</button>
+          <button class="pill" type="button" data-filter="all" aria-pressed="true">All</button>
+        </div>
+        <div class="product-grid">
+          <article class="product-card" data-categories="a2 bestseller" data-product-id="a2-ghee-1l" data-name="A2 Desi Cow Bilona Ghee 1 Litre">
+            <a class="product-card__link" href="product.html" aria-label="View A2 Desi Cow Bilona Ghee 1 Litre">
+              <div class="product-card__media">
+                <img
+                  src="https://cdn.shopify.com/s/files/1/0054/8300/3951/products/91yr2itCWcL._SL1500__1_1500x.jpg?v=1569312696"
+                  alt="A2 desi cow bilona ghee, 1 litre" width="306" height="306" loading="lazy" decoding="async">
+                <span class="product-card__badge">Sale</span>
+              </div>
+            </a>
+            <div class="product-card__rating" aria-label="Rated 4.9 out of 5 from 371 reviews">
+              <span class="star-rating" aria-hidden="true">
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+              </span>
+              <span class="product-card__review-count">371</span>
+            </div>
+            <h3 class="product-card__name"><a href="product.html">A2 Desi Cow Bilona Ghee — 1 Litre</a></h3>
+            <p class="product-card__price"><span class="price--old">₹2,790</span> <span class="price--now">₹2,140</span>
+              <span class="price--off">-23% OFF</span></p>
+            <button class="button button--primary button--full" type="button" data-add-to-cart>Add to
+              Cart</button>
+          </article>
+          <article class="product-card" data-categories="buffalo" data-product-id="buffalo-ghee-1l" data-name="Buffalo Bilona Ghee 1 Litre">
+            <a class="product-card__link" href="product.html" aria-label="View Buffalo Bilona Ghee 1 Litre">
+              <div class="product-card__media">
+                <img
+                  src="https://images.news18.com/news18marathi/uploads/2026/01/Ghee-1-2026-01-f6c0e764d6275aedfa888fc6712cb492-3x2.jpg?im=Resize,width=640,aspect=fit,type=normal"
+                  alt="Buffalo bilona ghee in a bowl" width="306" height="306" loading="lazy" decoding="async">
+                <span class="product-card__badge">Sale</span>
+              </div>
+            </a>
+            <div class="product-card__rating" aria-label="Rated 4.8 out of 5 from 23 reviews">
+              <span class="star-rating" aria-hidden="true">
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+              </span>
+              <span class="product-card__review-count">23</span>
+            </div>
+            <h3 class="product-card__name"><a href="product.html">Buffalo Bilona Ghee — 1 Litre</a></h3>
+            <p class="product-card__price"><span class="price--old">₹2,299</span> <span class="price--now">₹1,949</span>
+              <span class="price--off">-15% OFF</span></p>
+            <button class="button button--primary button--full" type="button" data-add-to-cart>Add to
+              Cart</button>
+          </article>
+          <article class="product-card" data-categories="a2 bestseller" data-product-id="a2-ghee-500ml" data-name="A2 Desi Cow Bilona Ghee 500 ml">
+            <a class="product-card__link" href="product.html" aria-label="View A2 Desi Cow Bilona Ghee 500 ml">
+              <div class="product-card__media">
+                <img src="https://ishavasyamproducts.com/cdn/shop/products/11_900x.jpg?v=1634724399"
+                  alt="A2 desi cow bilona ghee, 500 ml" width="306" height="306" loading="lazy" decoding="async">
+                <span class="product-card__badge">Sale</span>
+              </div>
+            </a>
+            <div class="product-card__rating" aria-label="Rated 4.9 out of 5 from 128 reviews">
+              <span class="star-rating" aria-hidden="true">
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+              </span>
+              <span class="product-card__review-count">128</span>
+            </div>
+            <h3 class="product-card__name"><a href="product.html">A2 Desi Cow Bilona Ghee — 500 ml</a></h3>
+            <p class="product-card__price"><span class="price--old">₹1,699</span> <span class="price--now">₹1,299</span>
+              <span class="price--off">-24% OFF</span></p>
+            <button class="button button--primary button--full" type="button" data-add-to-cart>Add to
+              Cart</button>
+          </article>
+          <article class="product-card" data-categories="gift combo a2 bestseller" data-product-id="a2-ghee-gift" data-name="A2 Ghee Gift Pack 2 x 500 ml">
+            <a class="product-card__link" href="product.html" aria-label="View A2 Ghee Gift Pack">
+              <div class="product-card__media">
+                <img src="https://www.distacart.com/cdn/shop/products/IshaVasyamA2DesiGhee.._1280x.jpg?v=1737559989"
+                  alt="A2 ghee gift pack, 2 x 500 ml" width="306" height="306" loading="lazy" decoding="async">
+                <span class="product-card__badge">Sale</span>
+              </div>
+            </a>
+            <div class="product-card__rating" aria-label="Rated 5.0 out of 5 from 96 reviews">
+              <span class="star-rating" aria-hidden="true">
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+                <svg class="star-rating__star is-filled" viewBox="0 0 24 24">
+                  <path d="M12 2.4l2.7 6.5 7 .6-5.3 4.5 1.7 7-6.1-3.7-6.1 3.7 1.7-7-5.3-4.5 7-.6L12 2.4z"></path>
+                </svg>
+              </span>
+              <span class="product-card__review-count">96</span>
+            </div>
+            <h3 class="product-card__name"><a href="product.html">A2 Ghee Gift Pack — 2 × 500 ml</a></h3>
+            <p class="product-card__price"><span class="price--old">₹3,199</span> <span class="price--now">₹2,699</span>
+              <span class="price--off">-16% OFF</span></p>
+            <button class="button button--primary button--full" type="button" data-add-to-cart>Add to
+              Cart</button>
+          </article>
+        </div>
+        <div class="view-more-row">
+          <a class="button button--primary" href="products.html#all">View More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS — horizontal pin scroll (CodePen qBNvrRQ mid section only).
+         Sticky stage + scrubbed translateX; native page scroll exits into
+         Our Story. No Locomotive, no intro/outro pages from the pen. -->
+    <section class="section process-pin-section" id="process" aria-labelledby="process-heading"
+      data-process-pin>
+      <div class="process-pin__stage">
+        <div class="process-pin__wrap" data-process-wrap>
+          <div class="process-pin__panel process-pin__panel--copy">
+            <p class="process-pin__eyebrow">From farm to jar</p>
+            <h2 id="process-heading">The traditional journey of our ghee</h2>
+            <p class="process-pin__lead">Five careful steps. No machines pressing the cream — only bilona, heat, and
+              time.</p>
+            <ol class="process-pin__steps">
+              <li>
+                <span class="process-pin__step-num" aria-hidden="true">01</span>
+                <h3>Milking</h3>
+                <p>Fresh milk from grass-fed desi cows, gathered by hand each morning.</p>
+              </li>
+              <li>
+                <span class="process-pin__step-num" aria-hidden="true">02</span>
+                <h3>Preparing curd</h3>
+                <p>Milk sets overnight into thick curd — the base of true bilona ghee.</p>
+              </li>
+              <li>
+                <span class="process-pin__step-num" aria-hidden="true">03</span>
+                <h3>Churning</h3>
+                <p>Hand-churned with a wooden bilona until butter rises to the top.</p>
+              </li>
+              <li>
+                <span class="process-pin__step-num" aria-hidden="true">04</span>
+                <h3>Heating</h3>
+                <p>Slow-cooked until the butter clarifies into golden, grainy ghee.</p>
+              </li>
+              <li>
+                <span class="process-pin__step-num" aria-hidden="true">05</span>
+                <h3>Packaging</h3>
+                <p>Poured warm into jars and sealed — batch by batch, never rushed.</p>
+              </li>
+            </ol>
+          </div>
+          <figure class="process-pin__panel process-pin__panel--media">
+            <img src="assets/images/process_bg_1.png" alt="Milking — desi cows and the start of the bilona process"
+              width="900" height="1200" loading="eager" decoding="async">
+            <figcaption>01 — Milking</figcaption>
+          </figure>
+          <figure class="process-pin__panel process-pin__panel--media">
+            <img src="assets/images/process_bg_2.png" alt="Preparing curd for traditional bilona ghee" width="900"
+              height="1200" loading="lazy" decoding="async">
+            <figcaption>02 — Preparing curd</figcaption>
+          </figure>
+          <figure class="process-pin__panel process-pin__panel--media">
+            <img src="assets/images/process_bg_3.png" alt="Hand-churning butter the bilona way" width="900" height="1200"
+              loading="lazy" decoding="async">
+            <figcaption>03 — Churning</figcaption>
+          </figure>
+          <figure class="process-pin__panel process-pin__panel--media">
+            <img src="assets/images/process_bg_4.png" alt="Heating butter until it becomes golden ghee" width="900"
+              height="1200" loading="lazy" decoding="async">
+            <figcaption>04 — Heating</figcaption>
+          </figure>
+          <figure class="process-pin__panel process-pin__panel--media">
+            <img src="assets/images/process_bg_5.png" alt="Packaging fresh bilona ghee into jars" width="900"
+              height="1200" loading="lazy" decoding="async">
+            <figcaption>05 — Packaging</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST — living farm window. Promises expand like the benefits
+         blinds; the media caption + soft parallax follow the active one.
+         No scroll pin — normal page flow. -->
+    <section class="section trust-section" id="our-story" aria-labelledby="story-heading" data-trust>
+      <div class="trust-intro container content">
+        <p class="section__eyebrow section__eyebrow--center">From our farm, to your kitchen</p>
+        <h2 class="section__title section__title--center" id="story-heading">Why families trust real100agro</h2>
+        <p class="trust-intro__lead">We work with small farms, pay fairly, and keep every batch traceable — from the cow
+          you can name to the jar on your shelf.</p>
+      </div>
+
+      <div class="trust-stage container" data-trust-stage>
+        <div class="trust-promises" role="list" aria-label="Why families trust us">
+          <button class="trust-promise is-active" type="button" role="listitem" data-trust-promise data-index="0"
+            aria-current="true">
+            <span class="trust-promise__index" aria-hidden="true">01</span>
+            <span class="trust-promise__body">
+              <span class="trust-promise__title">Grass-fed desi cows, no hormones</span>
+              <span class="trust-promise__text">Open pasture, named cows, honest feed — the milk starts clean before it
+                ever meets the bilona.</span>
+            </span>
+          </button>
+          <button class="trust-promise" type="button" role="listitem" data-trust-promise data-index="1"
+            aria-current="false">
+            <span class="trust-promise__index" aria-hidden="true">02</span>
+            <span class="trust-promise__body">
+              <span class="trust-promise__title">Traditional bilona, never machine-pressed</span>
+              <span class="trust-promise__text">Curd, wood, and patient hands. No industrial cream separator — just the
+                way ghee was always made.</span>
+            </span>
+          </button>
+          <button class="trust-promise" type="button" role="listitem" data-trust-promise data-index="2"
+            aria-current="false">
+            <span class="trust-promise__index" aria-hidden="true">03</span>
+            <span class="trust-promise__body">
+              <span class="trust-promise__title">Lab tested for purity in every batch</span>
+              <span class="trust-promise__text">Every jar can be traced back to the farm and the test — small batches,
+                nothing to hide.</span>
+            </span>
+          </button>
+          <a class="button button--primary trust-promises__cta" href="our-story.html">Read Our Story</a>
+        </div>
+
+        <div class="trust-media" data-trust-media>
+          <div class="trust-media__frame">
+            <img class="trust-media__img" data-trust-img src="https://pashukhata.com/assets/benefits_farmer.png"
+              alt="Farmer on a farm — how bilona ghee is made" width="960" height="720" loading="lazy"
+              decoding="async">
+            <div class="trust-media__veil" aria-hidden="true"></div>
+            <button class="trust-media__play" type="button" aria-label="Play video: How Bilona ghee is made">
+              <span aria-hidden="true">▶</span>
+            </button>
+            <p class="trust-media__caption" data-trust-caption>Open pasture. Named cows. Honest milk.</p>
+            <span class="trust-media__duration">2:34</span>
+          </div>
+          <div class="trust-rail" aria-hidden="true">
+            <div class="trust-rail__track">
+              <span class="trust-rail__fill" data-trust-fill></span>
+            </div>
+            <p class="trust-rail__label"><span data-trust-step>01</span> / 03</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED VIDEOS — cover-flow shopping cards, infinite loop -->
+    <section class="section section--cream section--videos" aria-labelledby="videos-heading">
+      <div class="container content">
+        <h2 class="section__title section__title--center" id="videos-heading">Featured Videos</h2>
+        <div class="carousel-controls">
+          <button type="button" data-video-prev aria-label="Previous video">‹</button>
+          <button type="button" data-video-next aria-label="Next video">›</button>
+        </div>
+        <div class="video-carousel" data-video-carousel>
+          <div class="video-track" data-video-track>
+            <article class="video-card is-active" data-video-card>
+              <div class="video-card__media">
+                <img
+                  src="https://images.news18.com/kannada/uploads/2024/08/gir-cow-2024-08-c79f0a68dbd60b0babccdc7f3da8ee3a-3x2.jpg?im=Resize,width=2048,aspect=fit,type=normal"
+                  alt="Gir cow in a field, video thumbnail" width="240" height="320" loading="lazy" decoding="async">
+                <button class="video-card__play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                </button>
+                <span class="video-card__views">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                  69K Views
+                </span>
+                <button class="video-card__wish" type="button" aria-label="Add to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M12 20.4l-1.45-1.32C5.4 14.36 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2c1.74 0 3.41.81 4.5 2.09C13.09 2.81 14.76 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.86-8.55 11.58L12 20.4z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+              <div class="video-card__body">
+                <div class="video-card__product">
+                  <img class="video-card__thumb"
+                    src="https://cdn.shopify.com/s/files/1/0054/8300/3951/products/91yr2itCWcL._SL1500__1_1500x.jpg?v=1569312696"
+                    alt="" width="40" height="40" loading="lazy" decoding="async">
+                  <h3 class="video-card__name">A2 Desi Cow Bilona Ghee</h3>
+                </div>
+                <p class="video-card__price">
+                  <strong class="price--now">₹2,140</strong>
+                  <span class="price--old">₹2,790</span>
+                  <span class="price--off">-23%</span>
+                </p>
+                <button class="button button--primary button--full button--small button--rect" type="button"
+                  data-product-id="a2-ghee-1l" data-add-to-cart>Buy Now</button>
+              </div>
+            </article>
+            <article class="video-card" data-video-card>
+              <div class="video-card__media">
+                <img src="https://tamil.boldsky.com/img/2022/10/1-carrot-ladoo-1665748468.jpg"
+                  alt="Sweets made with ghee, video thumbnail" width="240" height="320" loading="lazy"
+                  decoding="async">
+                <button class="video-card__play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                </button>
+                <span class="video-card__views">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                  76K Views
+                </span>
+                <button class="video-card__wish" type="button" aria-label="Add to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M12 20.4l-1.45-1.32C5.4 14.36 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2c1.74 0 3.41.81 4.5 2.09C13.09 2.81 14.76 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.86-8.55 11.58L12 20.4z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+              <div class="video-card__body">
+                <div class="video-card__product">
+                  <img class="video-card__thumb"
+                    src="https://ishavasyamproducts.com/cdn/shop/products/11_900x.jpg?v=1634724399" alt="" width="40"
+                    height="40" loading="lazy" decoding="async">
+                  <h3 class="video-card__name">A2 Desi Cow Bilona Ghee</h3>
+                </div>
+                <p class="video-card__price">
+                  <strong class="price--now">₹1,299</strong>
+                  <span class="price--old">₹1,699</span>
+                  <span class="price--off">-24%</span>
+                </p>
+                <button class="button button--primary button--full button--small button--rect" type="button"
+                  data-product-id="a2-ghee-500ml" data-add-to-cart>Buy Now</button>
+              </div>
+            </article>
+            <article class="video-card" data-video-card>
+              <div class="video-card__media">
+                <img src="https://www.kdmithaiwala.com/wp-content/uploads/2018/07/DESI-GHEE-BESAN-LADDU.jpg"
+                  alt="Besan laddu made with ghee, video thumbnail" width="240" height="320" loading="lazy"
+                  decoding="async">
+                <button class="video-card__play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                </button>
+                <span class="video-card__views">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                  65K Views
+                </span>
+                <button class="video-card__wish" type="button" aria-label="Add to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M12 20.4l-1.45-1.32C5.4 14.36 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2c1.74 0 3.41.81 4.5 2.09C13.09 2.81 14.76 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.86-8.55 11.58L12 20.4z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+              <div class="video-card__body">
+                <div class="video-card__product">
+                  <img class="video-card__thumb"
+                    src="https://images.news18.com/news18marathi/uploads/2026/01/Ghee-1-2026-01-f6c0e764d6275aedfa888fc6712cb492-3x2.jpg?im=Resize,width=640,aspect=fit,type=normal"
+                    alt="" width="40" height="40" loading="lazy" decoding="async">
+                  <h3 class="video-card__name">Buffalo Bilona Ghee</h3>
+                </div>
+                <p class="video-card__price">
+                  <strong class="price--now">₹1,130</strong>
+                  <span class="price--old">₹1,145</span>
+                  <span class="price--off">-1%</span>
+                </p>
+                <button class="button button--primary button--full button--small button--rect" type="button"
+                  data-product-id="buffalo-ghee-1l" data-add-to-cart>Buy Now</button>
+              </div>
+            </article>
+            <article class="video-card" data-video-card>
+              <div class="video-card__media">
+                <img src="https://www.shreevrindyanaturals.com/images/bilona-step-07-slow-heating.jpg"
+                  alt="Slow cooking ghee, video thumbnail" width="240" height="320" loading="lazy" decoding="async">
+                <button class="video-card__play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                </button>
+                <span class="video-card__views">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                  59K Views
+                </span>
+                <button class="video-card__wish" type="button" aria-label="Add to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M12 20.4l-1.45-1.32C5.4 14.36 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2c1.74 0 3.41.81 4.5 2.09C13.09 2.81 14.76 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.86-8.55 11.58L12 20.4z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+              <div class="video-card__body">
+                <div class="video-card__product">
+                  <img class="video-card__thumb"
+                    src="https://cdn.shopify.com/s/files/1/0054/8300/3951/products/91yr2itCWcL._SL1500__1_1500x.jpg?v=1569312696"
+                    alt="" width="40" height="40" loading="lazy" decoding="async">
+                  <h3 class="video-card__name">A2 Desi Cow Bilona Ghee</h3>
+                </div>
+                <p class="video-card__price">
+                  <strong class="price--now">₹2,140</strong>
+                  <span class="price--old">₹2,790</span>
+                  <span class="price--off">-23%</span>
+                </p>
+                <button class="button button--primary button--full button--small button--rect" type="button"
+                  data-product-id="a2-ghee-1l" data-add-to-cart>Buy Now</button>
+              </div>
+            </article>
+            <article class="video-card" data-video-card>
+              <div class="video-card__media">
+                <img
+                  src="https://images-pw.pixieset.com/elementfield/165891263/Harvest_0221_166-scaled-b1b6ce91-2500.jpg"
+                  alt="Hand milking, video thumbnail" width="240" height="320" loading="lazy" decoding="async">
+                <button class="video-card__play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                </button>
+                <span class="video-card__views">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                  76K Views
+                </span>
+                <button class="video-card__wish" type="button" aria-label="Add to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M12 20.4l-1.45-1.32C5.4 14.36 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2c1.74 0 3.41.81 4.5 2.09C13.09 2.81 14.76 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.86-8.55 11.58L12 20.4z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+              <div class="video-card__body">
+                <div class="video-card__product">
+                  <img class="video-card__thumb"
+                    src="https://ishavasyamproducts.com/cdn/shop/products/11_900x.jpg?v=1634724399" alt="" width="40"
+                    height="40" loading="lazy" decoding="async">
+                  <h3 class="video-card__name">A2 Desi Cow Bilona Ghee</h3>
+                </div>
+                <p class="video-card__price">
+                  <strong class="price--now">₹1,299</strong>
+                  <span class="price--old">₹1,699</span>
+                  <span class="price--off">-24%</span>
+                </p>
+                <button class="button button--primary button--full button--small button--rect" type="button"
+                  data-product-id="a2-ghee-500ml" data-add-to-cart>Buy Now</button>
+              </div>
+            </article>
+            <article class="video-card" data-video-card>
+              <div class="video-card__media">
+                <img src="https://im.whatshot.in/img/2021/Apr/162473-c-1618215860.jpg"
+                  alt="Paratha cooked in ghee, video thumbnail" width="240" height="320" loading="lazy"
+                  decoding="async">
+                <button class="video-card__play" type="button" aria-label="Play video">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                </button>
+                <span class="video-card__views">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M8.5 6.5v11l9-5.5-9-5.5z"></path>
+                  </svg>
+                  65K Views
+                </span>
+                <button class="video-card__wish" type="button" aria-label="Add to wishlist" aria-pressed="false">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M12 20.4l-1.45-1.32C5.4 14.36 2 11.28 2 7.5 2 4.42 4.42 2 7.5 2c1.74 0 3.41.81 4.5 2.09C13.09 2.81 14.76 2 16.5 2 19.58 2 22 4.42 22 7.5c0 3.78-3.4 6.86-8.55 11.58L12 20.4z">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+              <div class="video-card__body">
+                <div class="video-card__product">
+                  <img class="video-card__thumb"
+                    src="https://images.news18.com/news18marathi/uploads/2026/01/Ghee-1-2026-01-f6c0e764d6275aedfa888fc6712cb492-3x2.jpg?im=Resize,width=640,aspect=fit,type=normal"
+                    alt="" width="40" height="40" loading="lazy" decoding="async">
+                  <h3 class="video-card__name">Buffalo Bilona Ghee</h3>
+                </div>
+                <p class="video-card__price">
+                  <strong class="price--now">₹1,949</strong>
+                  <span class="price--old">₹2,299</span>
+                  <span class="price--off">-15%</span>
+                </p>
+                <button class="button button--primary button--full button--small button--rect" type="button"
+                  data-product-id="buffalo-ghee-1l" data-add-to-cart>Buy Now</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS — expanding photo blinds. Four tall strips share one
+         stage; hover/tap opens one while the others narrow. No scroll
+         pin, no multi-viewport trap — normal page flow. -->
+    <section class="section benefits-section" aria-labelledby="benefits-heading" data-benefits>
+      <div class="benefits-intro container content">
+        <p class="section__eyebrow section__eyebrow--center">Why this ghee</p>
+        <h2 class="section__title section__title--center" id="benefits-heading">One jar, many benefits</h2>
+        <p class="benefits-intro__lead">Open a panel — the story lives inside the photo.</p>
+      </div>
+
+      <div class="benefits-blinds" data-benefits-blinds role="list" aria-label="Benefits of A2 Desi Cow Ghee">
+        <article class="benefits-blind is-active" role="listitem" data-benefits-blind data-index="0" tabindex="0"
+          aria-labelledby="benefit-title-0">
+          <img class="benefits-blind__img" src="assets/images/benefits_1.webp"
+            alt="Desi cows grazing at dawn beside a clay pot and wooden churn" width="1200" height="800" loading="lazy"
+            decoding="async">
+          <div class="benefits-blind__veil" aria-hidden="true"></div>
+          <span class="benefits-blind__index" aria-hidden="true">01</span>
+          <span class="benefits-blind__word" aria-hidden="true">Pure</span>
+          <div class="benefits-blind__copy">
+            <h3 class="benefits-blind__title" id="benefit-title-0">Pure A2, bilona-churned</h3>
+            <p class="benefits-blind__text">Hand-churned from grass-fed desi cow milk. No additives, no shortcuts —
+              just the traditional bilona way.</p>
+          </div>
+        </article>
+
+        <article class="benefits-blind" role="listitem" data-benefits-blind data-index="1" tabindex="0"
+          aria-labelledby="benefit-title-1">
+          <img class="benefits-blind__img" src="assets/images/benefits_2.webp"
+            alt="Homestyle meal with rotis and a bowl of golden ghee" width="1200" height="800" loading="lazy"
+            decoding="async">
+          <div class="benefits-blind__veil" aria-hidden="true"></div>
+          <span class="benefits-blind__index" aria-hidden="true">02</span>
+          <span class="benefits-blind__word" aria-hidden="true">Easy</span>
+          <div class="benefits-blind__copy">
+            <h3 class="benefits-blind__title" id="benefit-title-1">Easy on digestion</h3>
+            <p class="benefits-blind__text">A2 protein is gentler on the gut — light enough for everyday cooking,
+              mornings to late dinners.</p>
+          </div>
+        </article>
+
+        <article class="benefits-blind" role="listitem" data-benefits-blind data-index="2" tabindex="0"
+          aria-labelledby="benefit-title-2">
+          <img class="benefits-blind__img" src="assets/images/benefits_3.webp"
+            alt="Brass bowl of golden ghee with turmeric on a farm at sunset" width="1200" height="800" loading="lazy"
+            decoding="async">
+          <div class="benefits-blind__veil" aria-hidden="true"></div>
+          <span class="benefits-blind__index" aria-hidden="true">03</span>
+          <span class="benefits-blind__word" aria-hidden="true">Immune</span>
+          <div class="benefits-blind__copy">
+            <h3 class="benefits-blind__title" id="benefit-title-2">Naturally boosts immunity</h3>
+            <p class="benefits-blind__text">Rich in fat-soluble vitamins that support everyday wellness — nourishment
+              that feels like care.</p>
+          </div>
+        </article>
+
+        <article class="benefits-blind" role="listitem" data-benefits-blind data-index="3" tabindex="0"
+          aria-labelledby="benefit-title-3">
+          <img class="benefits-blind__img" src="assets/images/benefits_4.webp"
+            alt="Slow-cooking golden ghee in a brass pot over an open fire" width="1200" height="800" loading="lazy"
+            decoding="async">
+          <div class="benefits-blind__veil" aria-hidden="true"></div>
+          <span class="benefits-blind__index" aria-hidden="true">04</span>
+          <span class="benefits-blind__word" aria-hidden="true">Golden</span>
+          <div class="benefits-blind__copy">
+            <h3 class="benefits-blind__title" id="benefit-title-3">Golden, slow-cooked goodness</h3>
+            <p class="benefits-blind__text">Cooked low and slow till grainy and aromatic — the colour and aroma of
+              real care in every spoon.</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="benefits-rail container" aria-hidden="true">
+        <div class="benefits-rail__track">
+          <span class="benefits-rail__fill" data-benefits-fill></span>
+        </div>
+        <p class="benefits-rail__label"><span data-benefits-step>01</span> / 04</p>
+      </div>
+    </section>
+
+    <!-- REVIEWS — endless drag/swipe carousel, equal-height cards -->
+    <section class="section section--cream section--reviews" aria-labelledby="reviews-heading">
+      <div class="container content">
+        <p class="section__eyebrow section__eyebrow--center">What our customers say</p>
+        <h2 class="section__title section__title--center" id="reviews-heading">Customer Reviews</h2>
+      </div>
+      <div class="review-carousel" data-review-carousel tabindex="0" aria-roledescription="carousel"
+        aria-label="Customer reviews">
+        <div class="review-track" data-review-track>
+          <article class="review-card" data-review-card>
+            <div class="review-card__scroll">
+              <p class="review-card__quote">“The aroma took me straight back to my grandmother’s kitchen. Grainy, golden, and so pure — we finish a jar faster than we expect.”</p>
+            </div>
+            <footer class="review-card__meta">
+              <p class="review-card__author">— Priya S.</p>
+              <p class="review-card__stars" aria-label="5 out of 5 stars">
+                <span class="star-rating" aria-hidden="true">
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                </span>
+              </p>
+            </footer>
+          </article>
+          <article class="review-card" data-review-card>
+            <div class="review-card__scroll">
+              <p class="review-card__quote">“My kids’ rotis taste better, and digestion feels lighter. This is now our everyday ghee — no going back to supermarket jars.”</p>
+            </div>
+            <footer class="review-card__meta">
+              <p class="review-card__author">— Rahul M.</p>
+              <p class="review-card__stars" aria-label="5 out of 5 stars">
+                <span class="star-rating" aria-hidden="true">
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                </span>
+              </p>
+            </footer>
+          </article>
+          <article class="review-card" data-review-card>
+            <div class="review-card__scroll">
+              <p class="review-card__quote">“Beautiful packing, fast delivery, and honest taste. You can tell it is small-batch — the colour and grain say everything.”</p>
+            </div>
+            <footer class="review-card__meta">
+              <p class="review-card__author">— Neha G.</p>
+              <p class="review-card__stars" aria-label="5 out of 5 stars">
+                <span class="star-rating" aria-hidden="true">
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                </span>
+              </p>
+            </footer>
+          </article>
+          <article class="review-card" data-review-card>
+            <div class="review-card__scroll">
+              <p class="review-card__quote">“I switched for A2 purity and stayed for the flavour. Tadka, sweets, even coffee — it holds up beautifully every time.”</p>
+            </div>
+            <footer class="review-card__meta">
+              <p class="review-card__author">— Ananya K.</p>
+              <p class="review-card__stars" aria-label="5 out of 5 stars">
+                <span class="star-rating" aria-hidden="true">
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                </span>
+              </p>
+            </footer>
+          </article>
+          <article class="review-card" data-review-card>
+            <div class="review-card__scroll">
+              <p class="review-card__quote">“Ordered for my parents first, then for ourselves. Quiet, honest ghee — no chemical aftertaste, just warmth.”</p>
+            </div>
+            <footer class="review-card__meta">
+              <p class="review-card__author">— Vikram D.</p>
+              <p class="review-card__stars" aria-label="5 out of 5 stars">
+                <span class="star-rating" aria-hidden="true">
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                </span>
+              </p>
+            </footer>
+          </article>
+          <article class="review-card" data-review-card>
+            <div class="review-card__scroll">
+              <p class="review-card__quote">“Gifted a jar for Diwali and got three ‘where did you buy this?’ messages the same week. That says enough.”</p>
+            </div>
+            <footer class="review-card__meta">
+              <p class="review-card__author">— Meera L.</p>
+              <p class="review-card__stars" aria-label="5 out of 5 stars">
+                <span class="star-rating" aria-hidden="true">
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                  <svg class="star-rating__star is-filled" viewBox="0 0 24 24"><path d="M12 2.5l2.6 6.4 6.9.6-5.2 4.6 1.6 6.7L12 17.8 5.1 20.8l1.6-6.7-5.2-4.6 6.9-.6L12 2.5z"></path></svg>
+                </span>
+              </p>
+            </footer>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER — Kasutam-style full illustrated background with
+       links and newsletter sitting on top of the art. -->
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="assets/images/logo.png" alt="real100agro" width="160" height="48">
+          <span class="footer-logo__text">real100agro</span>
+          <p>Pure desi cow A2 ghee, made the bilona way — from small farms to your kitchen.</p>
+          <p class="footer-cert">
+            <img src="assets/images/iso.svg" alt="ISO 9001:2015 certified" width="40" height="40" loading="lazy">
+            <img src="assets/images/haccp.svg" alt="HACCP food safety system" width="40" height="40" loading="lazy">
+            <span>FSSAI Lic. No. 10821008000026 &nbsp;•&nbsp; GSTIN 06AAKCR6284N1ZM</span>
+          </p>
+        </div>
+        <nav aria-label="Shop links">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="products.html#all">All Products</a></li>
+            <li><a href="products.html#bestsellers">Bestsellers</a></li>
+            <li><a href="products.html?filter=gift">Gift Sets</a></li>
+            <li><a href="products.html?filter=combo">Combos</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Company links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="our-story.html">Our Story</a></li>
+            <li><a href="#process">Ghee Journey</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="contact.html#faqs">FAQs</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Policies">
+          <h3>Policies</h3>
+          <ul>
+            <li><a href="policy.html?slug=privacy-policy">Privacy Policy</a></li>
+            <li><a href="policy.html?slug=terms">Terms &amp; Conditions</a></li>
+            <li><a href="policy.html?slug=shipping">Shipping Policy</a></li>
+            <li><a href="policy.html?slug=refund">Return &amp; Refund Policy</a></li>
+            <li><a href="policy.html?slug=cancellation">Cancellation Policy</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h3>Stay in touch</h3>
+          <p>New batches, festive packs and offers.</p>
+          <form class="newsletter-form" data-newsletter-form>
+            <label class="visually-hidden" for="newsletter-email">Email address</label>
+            <input id="newsletter-email" type="email" name="email" placeholder="Your email address" required
+              autocomplete="email">
+            <button class="button button--gold" type="submit">Subscribe</button>
+          </form>
+          <p class="form-message" data-newsletter-message role="status"></p>
+          <!-- TODO: replace # hrefs with live real100agro profile URLs
+               (then add target="_blank" rel="noopener noreferrer"). -->
+          <nav class="footer-social" aria-label="Social media">
+            <a class="footer-social__link" href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9A3.1 3.1 0 1 1 12 8.9a3.1 3.1 0 0 1 0 6.2Zm5.1-8.1a1.12 1.12 0 1 0 0-2.24 1.12 1.12 0 0 0 0 2.24ZM12 4.5c-1.5 0-1.7.01-2.3.03-.59.03-1 .12-1.35.26-.37.14-.68.33-.99.64-.31.31-.5.62-.64.99-.14.35-.23.76-.26 1.35-.02.6-.03.8-.03 2.3s.01 1.7.03 2.3c.03.59.12 1 .26 1.35.14.37.33.68.64.99.31.31.62.5.99.64.35.14.76.23 1.35.26.6.02.8.03 2.3.03s1.7-.01 2.3-.03c.59-.03 1-.12 1.35-.26.37-.14.68-.33.99-.64.31-.31.5-.62.64-.99.14-.35.23-.76.26-1.35.02-.6.03-.8.03-2.3s-.01-1.7-.03-2.3c-.03-.59-.12-1-.26-1.35a2.7 2.7 0 0 0-.64-.99 2.7 2.7 0 0 0-.99-.64c-.35-.14-.76-.23-1.35-.26-.6-.02-.8-.03-2.3-.03Zm0 1.53c1.47 0 1.65.01 2.23.03.54.02.83.11 1.03.19.26.1.45.22.64.41.2.2.32.38.41.64.08.2.17.49.19 1.03.02.58.03.76.03 2.23s-.01 1.65-.03 2.23c-.02.54-.11.83-.19 1.03-.1.26-.22.45-.41.64-.2.2-.38.32-.64.41-.2.08-.49.17-1.03.19-.58.02-.76.03-2.23.03s-1.65-.01-2.23-.03c-.54-.02-.83-.11-1.03-.19a1.7 1.7 0 0 1-.64-.41 1.7 1.7 0 0 1-.41-.64c-.08-.2-.17-.49-.19-1.03-.02-.58-.03-.76-.03-2.23s.01-1.65.03-2.23c.02-.54.11-.83.19-1.03.1-.26.22-.45.41-.64.2-.2.38-.32.64-.41.2-.08.49-.17 1.03-.19.58-.02.76-.03 2.23-.03Z" />
+              </svg>
+            </a>
+            <a class="footer-social__link" href="#" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  d="M14.5 8.5V6.8c0-.5.1-.7.8-.7h1.5V3.5h-2.4c-2.7 0-3.7 1.5-3.7 3.7v1.3H8.5V12h2.2v8.5h3.3V12h2.4l.4-3.5h-2.3Z" />
+              </svg>
+            </a>
+            <a class="footer-social__link" href="#" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  d="M12.04 3.5A8.45 8.45 0 0 0 3.6 11.95c0 1.49.39 2.94 1.13 4.22L3.5 20.5l4.47-1.17a8.46 8.46 0 0 0 4.07 1.04h.01a8.45 8.45 0 0 0 8.45-8.42 8.43 8.43 0 0 0-8.46-8.45Zm4.95 11.95c-.21.59-1.23 1.13-1.7 1.2-.44.07-.99.1-1.6-.1-.37-.12-.85-.28-1.46-.55-2.57-1.11-4.24-3.7-4.37-3.87-.12-.17-1.02-1.36-1.02-2.6 0-1.23.65-1.84.88-2.09.23-.25.5-.31.67-.31h.48c.15 0 .36-.06.56.43.21.5.71 1.74.77 1.86.06.12.1.27.02.43-.08.17-.12.27-.24.42-.12.14-.25.32-.36.43-.12.12-.24.25-.1.48.14.23.62 1.02 1.33 1.65.91.81 1.68 1.06 1.91 1.18.23.12.37.1.5-.06.14-.17.58-.67.73-.9.15-.23.3-.19.5-.12.21.08 1.31.62 1.54.73.23.12.38.17.44.27.06.1.06.57-.15 1.16Z" />
+              </svg>
+            </a>
+            <a class="footer-social__link" href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  d="M21.6 8.2a2.7 2.7 0 0 0-1.9-1.9C18.1 5.9 12 5.9 12 5.9s-6.1 0-7.7.4A2.7 2.7 0 0 0 2.4 8.2 28.4 28.4 0 0 0 2 12a28.4 28.4 0 0 0 .4 3.8 2.7 2.7 0 0 0 1.9 1.9c1.6.4 7.7.4 7.7.4s6.1 0 7.7-.4a2.7 2.7 0 0 0 1.9-1.9A28.4 28.4 0 0 0 22 12a28.4 28.4 0 0 0-.4-3.8ZM10.2 14.8V9.2L15.5 12l-5.3 2.8Z" />
+              </svg>
+            </a>
+            <a class="footer-social__link" href="#" aria-label="X (Twitter)">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  d="M16.7 4.5h2.4l-5.3 6.05L20.5 19.5h-4.7l-3.7-4.83L7.9 19.5H5.5l5.67-6.48L3.7 4.5h4.8l3.33 4.42L16.7 4.5Zm-.85 13.5h1.34L8.3 5.9H6.86l8.99 12.1Z" />
+              </svg>
+            </a>
+          </nav>
+        </div>
+      </div>
+      <p class="footer-bottom">© 2026 real100agro &nbsp;•&nbsp; Pure Desi Cow A2 Ghee &nbsp;•&nbsp; Made with care in
+        India</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/api.js" defer></script>
+    <script src="assets/js/store.js" defer></script>
+  <script src="assets/js/commerce.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/content.js" defer></script>
+  <script src="assets/js/hero-cinematic.js" defer></script>
+  <script src="assets/js/benefits-blinds.js" defer></script>
+  <script src="assets/js/trust-stage.js" defer></script>
+  <script src="assets/js/process-pin.js" defer></script>
+  <script src="assets/js/video-coverflow.js" defer></script>
+  <script src="assets/js/review-carousel.js" defer></script>
+</body>
+
+</html>

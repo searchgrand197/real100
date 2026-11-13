@@ -1,0 +1,177 @@
+/* Base: reset, typography, focus, skip link. No colours here except
+   via tokens, so the theme stays in tokens.css. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-base);
+  font-size: 16px;
+  line-height: var(--line-height-body);
+  color: var(--color-text);
+  background-color: var(--color-page-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: var(--line-height-heading);
+  color: var(--color-text-heading);
+}
+
+a {
+  color: var(--color-link);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Skip link for keyboard users */
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -100px;
+  z-index: 100;
+  padding: var(--space-1) var(--space-2);
+  background-color: var(--color-button-bg);
+  color: var(--color-button-text);
+  border-radius: var(--radius-small);
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: var(--space-2);
+}
+
+/* Layout helpers */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-2);
+  padding-right: var(--space-2);
+}
+
+.content {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
+.section--cream {
+  background-color: var(--color-section-cream);
+}
+
+.section--blush {
+  background-color: var(--color-section-blush);
+}
+
+.section--pink {
+  background-color: var(--color-section-pink);
+}
+
+.section__eyebrow {
+  margin-bottom: var(--space-1);
+  font-size: 0.8125rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-primary-maroon);
+}
+
+.section__title {
+  margin-bottom: var(--space-1);
+  font-size: 2.25rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.section__subtitle {
+  margin-bottom: var(--space-3);
+  color: var(--color-text-muted);
+}
+
+.section__title--center,
+.section__subtitle--center,
+.section__eyebrow--center {
+  text-align: center;
+}
+
+/* Visually hidden, but available to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reserved space for a future accent (birds on branch, cow, footer
+   background picture). Intentionally quiet: themed background only,
+   no picture and no text, so the layout does not break when the
+   accent is added later. */
+.accent-slot {
+  min-height: 120px;
+  background-color: var(--color-accent-slot-bg);
+  border-radius: var(--radius-medium);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
