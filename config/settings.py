@@ -32,6 +32,14 @@ def env_bool(name, default=False):
 SECRET_KEY = env("SECRET_KEY", "dev-only-insecure-change-me")
 DEBUG = env_bool("DEBUG", True)
 ALLOWED_HOSTS = [h.strip() for h in env("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",") if h.strip()]
+CSRF_TRUSTED_ORIGINS = [
+    o.strip()
+    for o in env(
+        "CSRF_TRUSTED_ORIGINS",
+        "https://real100agro.com,https://www.real100agro.com,https://real100agro.in,https://www.real100agro.in",
+    ).split(",")
+    if o.strip()
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -124,7 +132,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     o.strip() for o in env(
         "FRONTEND_ORIGIN",
-        "https://real100agro.uic-21mca2105.workers.dev,http://localhost:8000,http://127.0.0.1:8000",
+        "https://real100agro.com,https://www.real100agro.com,https://real100agro.in,https://www.real100agro.in,http://localhost:8000,http://127.0.0.1:8000,http://localhost:8001,http://127.0.0.1:8001",
     ).split(",") if o.strip()
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [

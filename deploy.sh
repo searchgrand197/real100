@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One-shot Ubuntu deploy: Django (Gunicorn) + static frontend + Nginx
-# Domain: yourbrand.intvice.com
+# Domains: real100agro.com + real100agro.in
 # Target layout: /root/real100/manage.py
 # Frontend: /root/real100/frontend/ (static HTML/CSS/JS, no build)
 #
@@ -9,7 +9,7 @@
 #   bash /root/real100/deploy.sh
 #
 # Optional:
-#   DOMAIN=yourbrand.intvice.com EMAIL=you@example.com bash /root/real100/deploy.sh
+#   EMAIL=you@example.com bash /root/real100/deploy.sh
 
 set -euo pipefail
 
@@ -20,8 +20,9 @@ if [[ "$(uname -s)" == "Linux" ]] && grep -q $'\r' "$0" 2>/dev/null; then
   exec bash "$tmp" "$@"
 fi
 
-DOMAIN="${DOMAIN:-yourbrand.intvice.com}"
-APP_NAME="${APP_NAME:-yourbrand}"
+DOMAIN="${DOMAIN:-real100agro.com}"
+DOMAIN_ALT="${DOMAIN_ALT:-real100agro.in}"
+APP_NAME="${APP_NAME:-real100agro}"
 APP_USER="${APP_USER:-www-data}"
 EMAIL="${EMAIL:-admin@${DOMAIN}}"
 WORKERS="${WORKERS:-$(( $(nproc) * 2 + 1 ))}"
@@ -119,12 +120,11 @@ pip install -r "${APP_DIR}/requirements.txt"
 if [[ ! -f "${ENV_FILE}" ]]; then
   SECRET="$(python3 -c 'import secrets; print(secrets.token_urlsafe(50))')"
   cat > "${ENV_FILE}" <<EOF
-DJANGO_SECRET_KEY=${SECRET}
-DJANGO_DEBUG=0
-DJANGO_ALLOWED_HOSTS=${DOMAIN},www.${DOMAIN},127.0.0.1,localhost
-DJANGO_CSRF_TRUSTED_ORIGINS=https://${DOMAIN},https://www.${DOMAIN},http://${DOMAIN},http://www.${DOMAIN}
-ADMIN_PIN=1234
-LEAD_VALUE_RUPEES=50
+SECRET_KEY=${SECRET}
+DEBUG=False
+ALLOWED_HOSTS=${DOMAIN},www.${DOMAIN},${DOMAIN_ALT},www.${DOMAIN_ALT},127.0.0.1,localhost
+CSRF_TRUSTED_ORIGINS=https://${DOMAIN},https://www.${DOMAIN},https://${DOMAIN_ALT},https://www.${DOMAIN_ALT},http://${DOMAIN},http://www.${DOMAIN},http://${DOMAIN_ALT},http://www.${DOMAIN_ALT}
+FRONTEND_ORIGIN=https://${DOMAIN},https://www.${DOMAIN},https://${DOMAIN_ALT},https://www.${DOMAIN_ALT},http://localhost:8001,http://127.0.0.1:8001
 EOF
   echo "==> Wrote ${ENV_FILE}"
 else
@@ -180,7 +180,7 @@ chmod 664 "${APP_DIR}/db.sqlite3" 2>/dev/null || true
 echo "==> Writing Gunicorn systemd unit"
 cat > "/etc/systemd/system/${SERVICE_NAME}.service" <<EOF
 [Unit]
-Description=Gunicorn for ${APP_NAME} (${DOMAIN})
+Description=Gunicorn for ${APP_NAME} (${DOMAIN} + ${DOMAIN_ALT})
 After=network.target
 
 [Service]
@@ -204,7 +204,7 @@ RestartSec=3
 WantedBy=multi-user.target
 EOF
 
-echo "==> Writing Nginx site for ${DOMAIN}"
+echo "==> Writing Nginx site for ${DOMAIN} + ${DOMAIN_ALT}"
 cat > "${NGINX_SITE}" <<EOF
 upstream ${APP_NAME}_app {
     server unix:${SOCKET_PATH} fail_timeout=0;
@@ -213,7 +213,7 @@ upstream ${APP_NAME}_app {
 server {
     listen 80;
     listen [::]:80;
-    server_name ${DOMAIN} www.${DOMAIN};
+    server_name ${DOMAIN} www.${DOMAIN} ${DOMAIN_ALT} www.${DOMAIN_ALT};
 
     client_max_body_size 25M;
 
@@ -284,14 +284,16 @@ fi
 nginx -t
 systemctl reload nginx
 
-echo "==> Attempting Let's Encrypt SSL (DNS A record for ${DOMAIN} must point here)"
-if certbot --nginx -d "${DOMAIN}" \
+echo "==> Attempting Let's Encrypt SSL (DNS A records for both domains must point here)"
+if certbot --nginx \
+    -d "${DOMAIN}" -d "www.${DOMAIN}" \
+    -d "${DOMAIN_ALT}" -d "www.${DOMAIN_ALT}" \
     --non-interactive --agree-tos -m "${EMAIL}" --redirect; then
-  echo "SSL enabled: https://${DOMAIN}"
+  echo "SSL enabled: https://${DOMAIN} and https://${DOMAIN_ALT}"
 else
-  echo "WARN: Certbot failed (DNS not ready yet?). Site is on http://${DOMAIN}"
+  echo "WARN: Certbot failed (DNS not ready yet?). Site is on http://${DOMAIN} / http://${DOMAIN_ALT}"
   echo "Later run:"
-  echo "  certbot --nginx -d ${DOMAIN} -m ${EMAIL} --agree-tos --non-interactive --redirect"
+  echo "  certbot --nginx -d ${DOMAIN} -d www.${DOMAIN} -d ${DOMAIN_ALT} -d www.${DOMAIN_ALT} -m ${EMAIL} --agree-tos --non-interactive --redirect"
 fi
 
 systemctl restart "${SERVICE_NAME}"
@@ -300,7 +302,7 @@ systemctl reload nginx
 echo
 echo "============================================"
 echo " Deploy complete (git-ready)"
-echo " URL:     https://${DOMAIN}  (or http:// if SSL pending)"
+echo " URL:     https://${DOMAIN}  + https://${DOMAIN_ALT}"
 echo " API:     /api/"
 echo " Django:  /admin/"
 echo " App:     ${APP_DIR}"
@@ -312,4 +314,4 @@ echo "Install path: /root/real100/manage.py"
 echo "Clone + deploy:"
 echo "  git clone https://github.com/searchgrand197/real100.git /root/real100"
 echo "  bash /root/real100/deploy.sh"
-echo "Change ADMIN_PIN in ${ENV_FILE}, then: systemctl restart ${SERVICE_NAME}"
+echo "Fill secrets in ${ENV_FILE}, then: systemctl restart ${SERVICE_NAME}"

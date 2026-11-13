@@ -1,8 +1,7 @@
 /* real100agro — API client for the Django backend.
    Loaded before store.js on every page.
    API base: window.REAL100AGRO_API_BASE, else localhost:8000 in local
-   dev, else https://api.real100agro.com/api (set this when the backend
-   is deployed — the backend itself is not deployed yet).
+   dev, else same-origin /api on real100agro.com / real100agro.in.
    Auth token is the only thing kept in localStorage (DRF token);
    cart, orders, addresses and products all live on the server. */
 
@@ -36,7 +35,8 @@
       return "http://" + host + ":8000/api";
     }
     if (host === "") return "http://127.0.0.1:8000/api";
-    return "https://api.real100agro.com/api";
+    // Production: Nginx serves frontend + /api on the same domain.
+    return window.location.origin.replace(/\/$/, "") + "/api";
   }
 
   var BASE = apiBase();
