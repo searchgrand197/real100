@@ -270,8 +270,8 @@ server {
 }
 EOF
 
+# Only enable this project's site — do not disable/remove other projects' Nginx sites
 ln -sfn "${NGINX_SITE}" "/etc/nginx/sites-enabled/${APP_NAME}"
-rm -f /etc/nginx/sites-enabled/default
 
 if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null | grep -q "Status: active"; then
   echo "==> Opening firewall for Nginx"
