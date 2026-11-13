@@ -170,8 +170,8 @@
 .hero-jar {
   position: relative;
   z-index: 3;
-  width: min(34vw, 230px);
-  max-height: min(42svh, 100%);
+  width: min(52vw, 420px);
+  max-height: min(62svh, 100%);
   margin: 0 auto;
   transform: translate3d(0, 0, 0);
   will-change: transform;
@@ -182,7 +182,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: min(42svh, 100%);
+  max-height: min(62svh, 100%);
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;

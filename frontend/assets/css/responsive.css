@@ -146,7 +146,7 @@
   }
 
   .hero-jar {
-    width: min(48vw, 210px);
+    width: min(72vw, 340px);
   }
 
   .hero-display {
@@ -230,7 +230,7 @@
 /* Small phones */
 @media (max-width: 479px) {
   .hero-jar {
-    width: min(52vw, 190px);
+    width: min(78vw, 300px);
   }
 
   .hero-brand {
@@ -283,7 +283,7 @@
   }
 
   .hero-jar {
-    width: min(36vw, 240px);
+    width: min(48vw, 380px);
   }
 
   .footer-grid {
