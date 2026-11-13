@@ -20,6 +20,14 @@ if [[ "$(uname -s)" == "Linux" ]] && grep -q $'\r' "$0" 2>/dev/null; then
   exec bash "$tmp" "$@"
 fi
 
+# Drop stale env from an old yourbrand/intvice deploy (DOMAIN=... overrides defaults)
+case "${DOMAIN:-}" in
+  *yourbrand*|*intvice*) unset DOMAIN APP_NAME ;;
+esac
+case "${APP_NAME:-}" in
+  yourbrand) unset APP_NAME ;;
+esac
+
 DOMAIN="${DOMAIN:-real100agro.com}"
 DOMAIN_ALT="${DOMAIN_ALT:-real100agro.in}"
 APP_NAME="${APP_NAME:-real100agro}"
@@ -28,6 +36,8 @@ EMAIL="${EMAIL:-admin@${DOMAIN}}"
 WORKERS="${WORKERS:-$(( $(nproc) * 2 + 1 ))}"
 SEED_DATA="${SEED_DATA:-1}"
 PREFERRED_APP_DIR="/root/real100"
+
+echo "==> Domains: ${DOMAIN} + ${DOMAIN_ALT}  (service: ${APP_NAME})"
 
 if [[ "${EUID}" -ne 0 ]]; then
   echo "Run as root: bash /root/real100/deploy.sh"
