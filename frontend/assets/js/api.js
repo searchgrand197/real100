@@ -86,10 +86,10 @@
   }
 
   /* ---------- Firebase Phone Auth (OTP) ----------
-     Same Firebase project the clinic site uses for SMS login.
-     Override with window.REAL100AGRO_FIREBASE_CONFIG before this file
-     if the shop moves to its own Firebase project. Set it to false to
-     fall back to the local demo OTP (ALLOW_DEMO_AUTH=1 on the server). */
+     Production: Firebase SMS via the configured web app.
+     Local/dev: when the API has ALLOW_DEMO_AUTH=1, use demo OTP
+     (Firebase blocks Phone Auth on "localhost"; 127.0.0.1 needs
+     Authorized domains + SMS region policy in the Firebase console). */
   var DEFAULT_FIREBASE_CONFIG = {
     apiKey: "AIzaSyAvRobkSXCsNFOdogIFwKuN95nLOQIkXoI",
     authDomain: "kushnath-19401.firebaseapp.com",
@@ -104,6 +104,11 @@
     return window.REAL100AGRO_FIREBASE_CONFIG || DEFAULT_FIREBASE_CONFIG;
   }
 
+  function isLocalHost() {
+    var host = window.location.hostname;
+    return host === "localhost" || host === "127.0.0.1" || host === "";
+  }
+
   var firebasePromise = null;
 
   function loadFirebase() {
@@ -116,7 +121,7 @@
       function loadScript(src) {
         return new Promise(function (res, rej) {
           var s = document.createElement("script");
-          s.src = src; s.onload = res; s.onerror = rej;
+          s.src = src; s.async = true; s.onload = res; s.onerror = rej;
           document.head.appendChild(s);
         });
       }
@@ -142,52 +147,88 @@
     if (code === "auth/invalid-verification-code") return "Incorrect OTP. Please try again.";
     if (code === "auth/code-expired") return "That OTP has expired. Request a new one.";
     if (code === "auth/captcha-check-failed") return "The security check failed. Request a new OTP.";
+    if (code === "auth/unauthorized-domain") {
+      return "This site domain is not allowed in Firebase. Add it under Authentication → Settings → Authorized domains (e.g. real100agro.com, www.real100agro.com, 127.0.0.1).";
+    }
+    if (code === "auth/operation-not-allowed") {
+      return "Phone sign-in is disabled in Firebase. Enable Phone under Authentication → Sign-in method.";
+    }
+    if (code === "auth/invalid-app-credential" || code === "auth/argument-error") {
+      return "Phone verification failed for this domain. On local use http://127.0.0.1:8001 (not localhost) and enable demo OTP, or add the domain in Firebase Authorized domains.";
+    }
     return (err && err.message) || "Could not send the OTP. Please try again.";
   }
 
+  function clearRecaptcha() {
+    if (recaptchaVerifier) {
+      try { recaptchaVerifier.clear(); } catch (e) { /* ignore */ }
+      recaptchaVerifier = null;
+    }
+    var container = document.getElementById("firebase-recaptcha");
+    if (container) container.innerHTML = "";
+  }
+
   function setupRecaptcha(auth) {
+    clearRecaptcha();
     var container = document.getElementById("firebase-recaptcha");
     if (!container) {
       container = document.createElement("div");
       container.id = "firebase-recaptcha";
+      container.style.display = "none";
       document.body.appendChild(container);
     }
-    if (recaptchaVerifier) {
-      try { recaptchaVerifier.clear(); } catch (e) { /* already cleared */ }
-      recaptchaVerifier = null;
-    }
-    container.innerHTML = "";
     recaptchaVerifier = new window.firebase.auth.RecaptchaVerifier(container, {
       size: "invisible",
       callback: function () {},
-    });
-    return recaptchaVerifier;
+      "expired-callback": function () { clearRecaptcha(); },
+    }, auth);
+    return recaptchaVerifier.render().then(function () { return recaptchaVerifier; });
   }
 
-  function sendOtp(phone10) {
-    if (!firebaseConfig()) {
-      return request("/auth/config/").then(function (cfg) {
-        if (!cfg || !cfg.demo_auth) {
-          throw new Error("Phone login needs Firebase. Set ALLOW_DEMO_AUTH=1 only for a local test without SMS.");
-        }
-        demoLogin = { phone: phone10, otp: String(cfg.demo_otp || "1234") };
-        confirmationResult = null;
-        return { demo: true, otp: demoLogin.otp };
-      });
-    }
+  function useDemoOtp(phone10, cfg) {
+    demoLogin = { phone: phone10, otp: String((cfg && cfg.demo_otp) || "1234") };
+    confirmationResult = null;
+    return { demo: true, otp: demoLogin.otp };
+  }
+
+  function sendFirebaseOtp(phone10) {
     demoLogin = null;
     return loadFirebase().then(function (auth) {
       var prep = auth.currentUser ? auth.signOut() : Promise.resolve();
-      return prep.then(function () {
-        var verifier = setupRecaptcha(auth);
-        return auth.signInWithPhoneNumber("+91" + phone10, verifier);
-      }).then(function (result) {
-        confirmationResult = result;
-        return { demo: false };
-      }).catch(function (err) {
-        if (recaptchaVerifier) {
-          try { recaptchaVerifier.clear(); } catch (e) { /* ignore */ }
-          recaptchaVerifier = null;
+      return prep.then(function () { return setupRecaptcha(auth); })
+        .then(function (verifier) {
+          return auth.signInWithPhoneNumber("+91" + phone10, verifier);
+        })
+        .then(function (result) {
+          confirmationResult = result;
+          return { demo: false };
+        })
+        .catch(function (err) {
+          clearRecaptcha();
+          throw err;
+        });
+    });
+  }
+
+  function sendOtp(phone10) {
+    // Always ask the API whether demo auth is on — Firebase config alone
+    // used to force SMS and skip the working local demo path.
+    return request("/auth/config/").then(function (cfg) {
+      var forceDemo = window.REAL100AGRO_USE_DEMO_AUTH === true;
+      var forceFirebase = window.REAL100AGRO_FORCE_FIREBASE === true;
+      var demoOk = !!(cfg && cfg.demo_auth);
+
+      if (!forceFirebase && (forceDemo || (demoOk && isLocalHost()))) {
+        return useDemoOtp(phone10, cfg);
+      }
+      if (!firebaseConfig()) {
+        if (demoOk) return useDemoOtp(phone10, cfg);
+        throw new Error("Phone login needs Firebase. For local testing set ALLOW_DEMO_AUTH=1 on the API.");
+      }
+      return sendFirebaseOtp(phone10).catch(function (err) {
+        // Local fallback when Firebase Phone Auth is blocked (localhost policy).
+        if (demoOk && isLocalHost()) {
+          return useDemoOtp(phone10, cfg);
         }
         throw new Error(firebaseAuthMessage(err));
       });
