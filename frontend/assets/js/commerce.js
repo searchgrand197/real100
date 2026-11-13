@@ -930,22 +930,37 @@
         var addBtn = event.target.closest("[data-add-to-cart]");
         if (addBtn) {
           event.preventDefault();
+          if (addBtn.getAttribute("data-adding") === "1") return;
+          addBtn.setAttribute("data-adding", "1");
           var productId = resolveProductId(addBtn);
-          if (!productId || !store.getProduct(productId)) {
-            toast("Product unavailable");
-            return;
-          }
           var qty = resolveQty(addBtn);
           // On the product page the active size pill carries the variant.
           var detailHost = addBtn.closest("[data-product-detail]") || document.querySelector("[data-product-detail]");
           var activeSize = detailHost ? detailHost.querySelector("[data-product-size][aria-pressed='true']") : null;
           var variantId = activeSize ? activeSize.getAttribute("data-variant-id") : null;
-          store.addToCart(productId, qty, variantId);
-          updateCartBadge();
-          toast("Added to cart");
-          if (/buy\s*now/i.test(addBtn.textContent || "")) {
-            openCart();
-          }
+          var wait = store.ready ? store.ready() : Promise.resolve();
+          wait.then(function () {
+            if (!productId || !store.getProduct(productId)) {
+              toast("Product unavailable — catalog not loaded. Check /api/products/");
+              return null;
+            }
+            return store.addToCart(productId, qty, variantId);
+          }).then(function (ok) {
+            if (ok === null) return;
+            if (!ok) {
+              toast("Product unavailable — add a size/variant in admin");
+              return;
+            }
+            updateCartBadge();
+            toast("Added to cart");
+            if (/buy\s*now/i.test(addBtn.textContent || "")) {
+              openCart();
+            }
+          }).catch(function (err) {
+            toast((err && err.message) || "Could not add to cart");
+          }).then(function () {
+            addBtn.removeAttribute("data-adding");
+          });
           return;
         }
 

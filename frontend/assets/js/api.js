@@ -35,8 +35,8 @@
       return "http://" + host + ":8000/api";
     }
     if (host === "") return "http://127.0.0.1:8000/api";
-    // Production: Nginx serves frontend + /api on the same domain.
-    return window.location.origin.replace(/\/$/, "") + "/api";
+    // Production: same-origin /api (works for http and https on this host).
+    return "/api";
   }
 
   var BASE = apiBase();
